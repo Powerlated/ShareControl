@@ -32,80 +32,96 @@ import com.net.h1karo.sharecontrol.ShareControl;
 public class BlockPlaceToCreationsListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public BlockPlaceToCreationsListener(ShareControl h)
-	{
+
+	public BlockPlaceToCreationsListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void AntiCreations(BlockPlaceEvent e)
-	{
+	public void antiCreations(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
-        Block b = e.getBlockPlaced();
-        World world = p.getWorld();
-        
-        if(p.getGameMode() != GameMode.CREATIVE) return;
-        
-        //Anti Whiter Creation
-        
-        if ((!Permissions.perms(p, "allow.creatures"))) {
-            if (b.getType() == Material.SKULL) {
-            	if(checkSkullWhiter(b)) {
-            		e.setCancelled(true);
-            		return;
-                }
-            }
-        }
-        
-         //Anti SnowGolem Creation
-         
-        if ((!Permissions.perms(p, "allow.creatures")) && 
-                ((b.getType() == Material.PUMPKIN) || (b.getType() == Material.JACK_O_LANTERN)) &&
-                (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ()).getType() == Material.SNOW_BLOCK) &&
-                (world.getBlockAt(b.getX(), b.getY() - 2, b.getZ()).getType() == Material.SNOW_BLOCK)) {
-            
-            e.setCancelled(true);
-            return;
-        }
-        
-        
-         // Anti IronGolem Creation
-         
-        if ((!Permissions.perms(p, "allow.creatures")) && 
-                ((b.getType() == Material.PUMPKIN) || (b.getType() == Material.JACK_O_LANTERN)) && 
-                (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK) &&
-                (world.getBlockAt(b.getX(), b.getY() - 2, b.getZ()).getType() == Material.IRON_BLOCK) &&
-                (((world.getBlockAt(b.getX() + 1, b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK) &&
-                (world.getBlockAt(b.getX() - 1, b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK)) ||
-                ((world.getBlockAt(b.getX(), b.getY() - 1, b.getZ() + 1).getType() == Material.IRON_BLOCK) &&
-                (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ() - 1).getType() == Material.IRON_BLOCK)))) {
-            e.setCancelled(true);
-            return;
-        }
+		Block b = e.getBlockPlaced();
+		World world = p.getWorld();
+
+		if (p.getGameMode() != GameMode.CREATIVE)
+			return;
+
+		// Anti Whiter Creation
+
+		if ((!Permissions.perms(p, "allow.creatures"))) {
+			if (b.getType() == Material.SKULL) {
+				if (checkWitherSkull(b)) {
+					e.setCancelled(true);
+					return;
+				}
+			}
+		}
+
+		// Anti SnowGolem Creation
+
+		if ((!Permissions.perms(p, "allow.creatures"))
+				&& ((b.getType() == Material.PUMPKIN) || (b.getType() == Material.JACK_O_LANTERN))
+				&& (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ()).getType() == Material.SNOW_BLOCK)
+				&& (world.getBlockAt(b.getX(), b.getY() - 2, b.getZ()).getType() == Material.SNOW_BLOCK)) {
+
+			e.setCancelled(true);
+			return;
+		}
+
+		// Anti IronGolem Creation
+
+		if ((!Permissions.perms(p, "allow.creatures"))
+				&& ((b.getType() == Material.PUMPKIN) || (b.getType() == Material.JACK_O_LANTERN))
+				&& (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK)
+				&& (world.getBlockAt(b.getX(), b.getY() - 2, b.getZ()).getType() == Material.IRON_BLOCK)
+				&& (((world.getBlockAt(b.getX() + 1, b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK)
+						&& (world.getBlockAt(b.getX() - 1, b.getY() - 1, b.getZ()).getType() == Material.IRON_BLOCK))
+						|| ((world.getBlockAt(b.getX(), b.getY() - 1, b.getZ() + 1).getType() == Material.IRON_BLOCK)
+								&& (world.getBlockAt(b.getX(), b.getY() - 1, b.getZ() - 1)
+										.getType() == Material.IRON_BLOCK)))) {
+			e.setCancelled(true);
+			return;
+		}
 	}
 
 	// EXTRA
-	private boolean checkSkullWhiter(Block b) {
+	private boolean checkWitherSkull(Block b) {
 		World world = b.getWorld();
 		int x = b.getX();
 		int y = b.getY();
 		int z = b.getZ();
 		Material ss = Material.SOUL_SAND;
-		
+
 		/**
 		 * IF CENTER SKULL
-		 * */
-		if (world.getBlockAt(x, y - 1, z).getType() == ss && world.getBlockAt(x, y - 2, z).getType() == ss && ((world.getBlockAt(x + 1, y - 1, z).getType() == ss && world.getBlockAt(x - 1, y - 1, z).getType() == ss) || ((world.getBlockAt(x, y - 1, z + 1).getType() == ss && world.getBlockAt(x, y - 1, z - 1).getType() == ss)))) return true;
+		 */
+		if (world.getBlockAt(x, y - 1, z).getType() == ss && world.getBlockAt(x, y - 2, z).getType() == ss
+				&& ((world.getBlockAt(x + 1, y - 1, z).getType() == ss
+						&& world.getBlockAt(x - 1, y - 1, z).getType() == ss)
+						|| ((world.getBlockAt(x, y - 1, z + 1).getType() == ss
+								&& world.getBlockAt(x, y - 1, z - 1).getType() == ss))))
+			return true;
 		/**
 		 * IF LEFT SKULL
-		 * */
-		if (world.getBlockAt(x, y - 1, z).getType() == ss && ((world.getBlockAt(x + 1, y - 1, z).getType() == ss && world.getBlockAt(x + 2, y - 1, z).getType() == ss && world.getBlockAt(x + 1, y - 2, z).getType() == ss) || (world.getBlockAt(x, y - 1, z + 1).getType() == ss && world.getBlockAt(x, y - 1, z + 2).getType() == ss && world.getBlockAt(x, y - 2, z + 1).getType() == ss))) return true;
+		 */
+		if (world.getBlockAt(x, y - 1, z).getType() == ss && ((world.getBlockAt(x + 1, y - 1, z).getType() == ss
+				&& world.getBlockAt(x + 2, y - 1, z).getType() == ss
+				&& world.getBlockAt(x + 1, y - 2, z).getType() == ss)
+				|| (world.getBlockAt(x, y - 1, z + 1).getType() == ss
+						&& world.getBlockAt(x, y - 1, z + 2).getType() == ss
+						&& world.getBlockAt(x, y - 2, z + 1).getType() == ss)))
+			return true;
 		/**
 		 * IF RIGHT SKULL
-		 * */
-		if (world.getBlockAt(x, y - 1, z).getType() == ss && ((world.getBlockAt(x - 1, y - 1, z).getType() == ss && world.getBlockAt(x - 2, y - 1, z).getType() == ss && world.getBlockAt(x - 1, y - 2, z).getType() == ss) || (world.getBlockAt(x, y - 1, z - 1).getType() == ss && world.getBlockAt(x, y - 1, z - 2).getType() == ss && world.getBlockAt(x, y - 2, z - 1).getType() == ss))) return true;
+		 */
+		if (world.getBlockAt(x, y - 1, z).getType() == ss && ((world.getBlockAt(x - 1, y - 1, z).getType() == ss
+				&& world.getBlockAt(x - 2, y - 1, z).getType() == ss
+				&& world.getBlockAt(x - 1, y - 2, z).getType() == ss)
+				|| (world.getBlockAt(x, y - 1, z - 1).getType() == ss
+						&& world.getBlockAt(x, y - 1, z - 2).getType() == ss
+						&& world.getBlockAt(x, y - 2, z - 1).getType() == ss)))
+			return true;
 		return false;
 	}
 
-	
 }

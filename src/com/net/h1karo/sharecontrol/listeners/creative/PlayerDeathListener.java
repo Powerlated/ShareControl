@@ -28,24 +28,20 @@ import org.bukkit.inventory.ItemStack;
 import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 
-public class PlayerDeathListener implements Listener
-{
+public class PlayerDeathListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerDeathListener(ShareControl h)
-	{
+
+	public PlayerDeathListener(ShareControl h) {
 		this.main = h;
 	}
-	
-	static ItemStack AIR = new ItemStack(Material.AIR, 1);
+
+	final static ItemStack AIR = new ItemStack(Material.AIR, 1);
 
 	@EventHandler
-	public void PlayerDeath(PlayerDeathEvent e)
-	{
+	public void playerDeath(PlayerDeathEvent e) {
 		Player p = e.getEntity();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.*"))
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.*")) {
 			e.getDrops().clear();
 			e.setDroppedExp(0);
 			return;

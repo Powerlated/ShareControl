@@ -32,47 +32,48 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.version.CoreVersion;
 
-public class EntityChangeBlockListener implements Listener
-{
+public class EntityChangeBlockListener implements Listener {
 	private final ShareControl main;
-	
-	public EntityChangeBlockListener(ShareControl h)
-	{
+
+	public EntityChangeBlockListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void EntityChangeBlock(EntityChangeBlockEvent e)
-	{
-		if(e.isCancelled()) return;
+	public void EntityChangeBlock(EntityChangeBlockEvent e) {
+		if (e.isCancelled())
+			return;
 		Block b = e.getBlock();
 		Entity eventEntity = e.getEntity();
-		
+
 		Database.DropBlocks(b);
-		
-		if(eventEntity.getType().equals(EntityType.FALLING_BLOCK)) {
+
+		if (eventEntity.getType().equals(EntityType.FALLING_BLOCK)) {
 			if (Database.CheckCreative(b)) {
 				FallingBlock entity = (FallingBlock) eventEntity;
 				if (e.getTo() == Material.AIR) {
 					entity.setDropItem(false);
 					Database.RemoveBlock(b);
-					entity.setMetadata("ShareControl.CREATIVE_FALLING_BLOCK", new FixedMetadataValue(main, b.getType().getId()));
+					entity.setMetadata("ShareControl.CREATIVE_FALLING_BLOCK",
+							new FixedMetadataValue(main, b.getType().getId()));
 				}
 			}
-			
-			if(CoreVersion.getVersionsArray().contains(CoreVersion.OneDotNinePlus)) {
+
+			if (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotNinePlus)) {
 				if (e.getTo().equals(b.getType()) && !e.getTo().equals(Material.AIR)) {
 					FallingBlock entity = (FallingBlock) eventEntity;
-					if(entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
-						Database.AddBlockMoreArguments(b, entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
+					if (entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
+						Database.AddBlockMoreArguments(b,
+								entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
 						entity.removeMetadata("ShareControl.CREATIVE_FALLING_BLOCK", main);
 					}
 				}
 			} else if (!e.getTo().equals(Material.AIR) && b.getType().equals(Material.AIR)) {
 				FallingBlock entity = (FallingBlock) eventEntity;
-				if(entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
-					Database.AddBlockMoreArguments(b, entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
+				if (entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
+					Database.AddBlockMoreArguments(b,
+							entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
 					entity.removeMetadata("ShareControl.CREATIVE_FALLING_BLOCK", main);
 				}
 			}

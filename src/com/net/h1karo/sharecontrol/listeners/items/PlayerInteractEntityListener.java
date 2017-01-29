@@ -35,32 +35,33 @@ import com.net.h1karo.sharecontrol.localization.LanguageFiles;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
 public class PlayerInteractEntityListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public PlayerInteractEntityListener(ShareControl h)
-	{
+
+	public PlayerInteractEntityListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void InfotoolInteractWithPlayer(PlayerInteractEntityEvent e)
-	{
+	public void InfotoolInteractWithPlayer(PlayerInteractEntityEvent e) {
 		Player p = e.getPlayer();
-		if(!(p instanceof Player) || !(e.getRightClicked() instanceof Player)) return;
-		
+		if (!(p instanceof Player) || !(e.getRightClicked() instanceof Player))
+			return;
+
 		String nameIT = ChatColor.translateAlternateColorCodes('&', LanguageFiles.nameinfotool);
 		String loreStr1 = ChatColor.translateAlternateColorCodes('&', LanguageFiles.loreIT1);
 		String loreStr2 = ChatColor.translateAlternateColorCodes('&', LanguageFiles.loreIT2);
 		List<String> loreIT = Arrays.asList(loreStr1, loreStr2);
-		
+
 		ItemStack infotool = Items.setMeta(new ItemStack(Material.BLAZE_POWDER), nameIT, loreIT);
-		
-		if(p.getItemInHand() == null || p.getItemInHand().getType() != infotool.getType() || p.getItemInHand().getItemMeta().getDisplayName() == null) return;
-		if(p.getItemInHand().getItemMeta().getDisplayName().compareToIgnoreCase(nameIT) == 0)
-		{
-			if(!Permissions.perms(p, "tools.infotool")) {
+
+		if (p.getItemInHand() == null || p.getItemInHand().getType() != infotool.getType()
+				|| p.getItemInHand().getItemMeta().getDisplayName() == null)
+			return;
+		if (p.getItemInHand().getItemMeta().getDisplayName().compareToIgnoreCase(nameIT) == 0) {
+			if (!Permissions.perms(p, "tools.infotool")) {
 				Localization.NoPerms(p);
 				return;
 			}

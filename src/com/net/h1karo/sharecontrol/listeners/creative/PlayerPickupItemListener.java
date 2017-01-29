@@ -26,22 +26,18 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 
-public class PlayerPickupItemListener implements Listener
-{
+public class PlayerPickupItemListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerPickupItemListener(ShareControl h)
-	{
+
+	public PlayerPickupItemListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void onPickup(PlayerPickupItemEvent e)
-	{
+	public void onPickup(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.pickup"))
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.pickup")) {
 			e.setCancelled(true);
 		}
 	}

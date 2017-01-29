@@ -29,19 +29,18 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 
 public class HangingPlaceListener implements Listener {
-	
+
 	private final ShareControl main;
-	public HangingPlaceListener(ShareControl h)
-	{
+
+	public HangingPlaceListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void HangingPlace(HangingPlaceEvent e)
-	{
+	public void HangingPlace(HangingPlaceEvent e) {
 		Player p = e.getPlayer();
 		Entity ent = e.getEntity();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.notlogging")) {
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.notlogging")) {
 			ent.setMetadata("ShareControl.CREATIVE_ENTITY", new FixedMetadataValue(main, "1"));
 		}
 	}

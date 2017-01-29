@@ -28,39 +28,49 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 
-public class BlockPlaceListener implements Listener
-{
+public class BlockPlaceListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public BlockPlaceListener(ShareControl h)
-	{
+
+	public BlockPlaceListener(ShareControl h) {
 		this.main = h;
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
-	public void onAutoPlace(BlockPlaceEvent e)
-	{
+	public void onAutoPlace(BlockPlaceEvent e) {
 		World w = e.getBlock().getWorld();
 		Block b = null;
-		
-		if(w.getBlockAt(e.getBlockPlaced().getX() + 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ()).getType() == Material.CACTUS)
+
+		if (w.getBlockAt(e.getBlockPlaced().getX() + 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ())
+				.getType() == Material.CACTUS)
 			b = w.getBlockAt(e.getBlockPlaced().getX() + 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ());
-		
-		if(w.getBlockAt(e.getBlockPlaced().getX() - 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ()).getType() == Material.CACTUS)
+
+		if (w.getBlockAt(e.getBlockPlaced().getX() - 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ())
+				.getType() == Material.CACTUS)
 			b = w.getBlockAt(e.getBlockPlaced().getX() - 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ());
-		
-		if(w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() + 1).getType() == Material.CACTUS)
+
+		if (w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() + 1)
+				.getType() == Material.CACTUS)
 			b = w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() + 1);
-		
-		if(w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() - 1).getType() == Material.CACTUS)
+
+		if (w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() - 1)
+				.getType() == Material.CACTUS)
 			b = w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() - 1);
-		
-		if(w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() - 1).getType() != Material.CACTUS && w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() + 1).getType() != Material.CACTUS && w.getBlockAt(e.getBlockPlaced().getX() - 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ()).getType() != Material.CACTUS && w.getBlockAt(e.getBlockPlaced().getX() + 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ()).getType() != Material.CACTUS) return;
-		
-		for(int j = 256; j > b.getLocation().getBlockY(); j--) 
-		{
+
+		if (w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() - 1)
+				.getType() != Material.CACTUS
+				&& w.getBlockAt(e.getBlockPlaced().getX(), e.getBlockPlaced().getY(), e.getBlockPlaced().getZ() + 1)
+						.getType() != Material.CACTUS
+				&& w.getBlockAt(e.getBlockPlaced().getX() - 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ())
+						.getType() != Material.CACTUS
+				&& w.getBlockAt(e.getBlockPlaced().getX() + 1, e.getBlockPlaced().getY(), e.getBlockPlaced().getZ())
+						.getType() != Material.CACTUS)
+			return;
+
+		for (int j = 256; j > b.getLocation().getBlockY(); j--) {
 			Block NewB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
-				if(Database.ifUpDrop(NewB))	Database.FullClear(NewB);
+			if (Database.ifUpDrop(NewB))
+				Database.FullClear(NewB);
 		}
 	}
 }

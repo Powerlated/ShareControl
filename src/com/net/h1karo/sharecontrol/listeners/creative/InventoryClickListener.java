@@ -38,41 +38,37 @@ import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class InventoryClickListener implements Listener
-{
+public class InventoryClickListener implements Listener {
 	private final ShareControl main;
-	
-	public InventoryClickListener(ShareControl h)
-	{
+
+	public InventoryClickListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	public static List<Player> cache = new ArrayList<Player>();
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void InventoryClick(InventoryClickEvent e)
-	{
+	public void inventoryClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
 		cache.add((Player) e.getWhoClicked());
-		if(p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.blocking-inventory.*") || Configuration.BlockingItemsInvList.toArray().length == 0 || Configuration.BlockingItemsInvList.get(0).toString().compareToIgnoreCase("[none]") == 0) return;
-		for(int i=0; i < Configuration.BlockingItemsInvList.toArray().length; i++)
-		{
-			String StrListItem = (String) Configuration.BlockingItemsInvList.toArray()[i];
-			if(!Permissions.perms(p, "allow.blocking-placement." + StrListItem)) {
+		if (p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.blocking-inventory.*")
+				|| Configuration.blockingItemsInvList.toArray().length == 0
+				|| Configuration.blockingItemsInvList.get(0).toString().compareToIgnoreCase("[none]") == 0)
+			return;
+		for (int i = 0; i < Configuration.blockingItemsInvList.toArray().length; i++) {
+			String StrListItem = (String) Configuration.blockingItemsInvList.toArray()[i];
+			if (!Permissions.perms(p, "allow.blocking-placement." + StrListItem)) {
 				Material typeThisItem = e.getCursor().getType();
 				Material typeListItem;
-				if(Database.isInteger(StrListItem))
-				{
+				if (Database.isInteger(StrListItem)) {
 					String NewStr = StrListItem.replace("'", "");
 					int ID = Integer.parseInt(NewStr);
 					typeListItem = Material.getMaterial(ID);
-				}
-				else
+				} else
 					typeListItem = Material.getMaterial(StrListItem);
-				
-				if(typeThisItem == typeListItem)
-				{
+
+				if (typeThisItem == typeListItem) {
 					Localization.invNotify(typeThisItem, p);
 					e.setCancelled(true);
 					return;
@@ -80,16 +76,22 @@ public class InventoryClickListener implements Listener
 			}
 		}
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void InventoryDrop(InventoryCreativeEvent e)
-	{
-		if(!Configuration.ClearDropInInventory) return;
+	public void InventoryDrop(InventoryCreativeEvent e) {
+		if (!Configuration.clearDropInInventory)
+			return;
 		final Player p = (Player) e.getWhoClicked();
-		if(p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.drop") || !e.getAction().equals(InventoryAction.PLACE_ALL) || !e.getClick().equals(ClickType.CREATIVE) || e.getCursor().getType().equals(Material.AIR) || e.getCurrentItem() != null) return;
+		if (p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.drop")
+				|| !e.getAction().equals(InventoryAction.PLACE_ALL) || !e.getClick().equals(ClickType.CREATIVE)
+				|| e.getCursor().getType().equals(Material.AIR) || e.getCurrentItem() != null)
+			return;
 		cache.add(p);
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-            @Override
-            public void run() { cache.remove(p); }}, 20L);
+			@Override
+			public void run() {
+				cache.remove(p);
+			}
+		}, 20L);
 	}
 }

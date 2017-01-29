@@ -29,22 +29,22 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 
 public class EntityExplodeListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public EntityExplodeListener(ShareControl h)
-	{
+
+	public EntityExplodeListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void EntityExplode(EntityExplodeEvent e)
-	{
-		if(e.getEntity() == null || e.getEntityType() == null || e.getEntityType() == EntityType.PRIMED_TNT || e.getEntityType() == EntityType.CREEPER) {
+	public void EntityExplode(EntityExplodeEvent e) {
+		if (e.getEntity() == null || e.getEntityType() == null || e.getEntityType() == EntityType.PRIMED_TNT
+				|| e.getEntityType() == EntityType.CREEPER) {
 			List<Block> blocks = e.blockList();
-			for(int i=0; i < blocks.size(); i++) {
+			for (int i = 0; i < blocks.size(); i++) {
 				Block b = blocks.get(i);
-				if(Database.CheckCreative(b))
+				if (Database.CheckCreative(b))
 					e.blockList().remove(b);
 			}
 		}

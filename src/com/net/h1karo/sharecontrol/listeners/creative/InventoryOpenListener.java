@@ -31,30 +31,26 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class InventoryOpenListener implements Listener
-{
+public class InventoryOpenListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public InventoryOpenListener(ShareControl h)
-	{
+
+	public InventoryOpenListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-	public void InventoryOpen(InventoryOpenEvent e) {
+	public void inventoryOpen(InventoryOpenEvent e) {
 		Player p = (Player) e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.blocking-interact")) {
-			boolean ifVehicleInventory = p.getVehicle() != null &&
-				p.getVehicle().getType() == EntityType.HORSE &&
-				e.getInventory().getType() == InventoryType.CHEST ?
-				true : false;
-			
-			
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.blocking-interact")) {
+			boolean ifVehicleInventory = p.getVehicle() != null && p.getVehicle().getType() == EntityType.HORSE
+					&& e.getInventory().getType() == InventoryType.CHEST ? true : false;
+
 			Inventory inv = e.getInventory();
-			if(!ifVehicleInventory && !inv.getName().equalsIgnoreCase("container.minecart") && inv.getType() == InventoryType.CHEST)
+			if (!ifVehicleInventory && !inv.getName().equalsIgnoreCase("container.minecart")
+					&& inv.getType() == InventoryType.CHEST)
 				return;
-			
+
 			e.setCancelled(true);
 			Localization.openInv(p);
 		}

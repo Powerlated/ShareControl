@@ -36,127 +36,134 @@ import com.net.h1karo.sharecontrol.version.CoreVersion;
 public class BlockMoveByPistonListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public BlockMoveByPistonListener(ShareControl h)
-	{
+
+	public BlockMoveByPistonListener(ShareControl h) {
 		this.main = h;
 	}
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void onPistonExtend(BlockPistonExtendEvent e)
-	{
-		if(e.isCancelled()) return;
-		
+	public void onPistonExtend(BlockPistonExtendEvent e) {
+		if (e.isCancelled())
+			return;
+
 		blocksHandling(e.getBlocks(), e.getDirection());
-		
+
 		Block b = e.getBlock();
-		if(Database.CheckCreative(b)) {
-			if(e.getDirection().equals(BlockFace.EAST))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()), Material.PISTON_EXTENSION.getId());
-			if(e.getDirection().equals(BlockFace.WEST))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()), Material.PISTON_EXTENSION.getId());
-			if(e.getDirection().equals(BlockFace.SOUTH))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1), Material.PISTON_EXTENSION.getId());
-			if(e.getDirection().equals(BlockFace.NORTH))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1), Material.PISTON_EXTENSION.getId());
-			if(e.getDirection().equals(BlockFace.UP))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()), Material.PISTON_EXTENSION.getId());
-			if(e.getDirection().equals(BlockFace.DOWN))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()), Material.PISTON_EXTENSION.getId());
+		if (Database.CheckCreative(b)) {
+			if (e.getDirection().equals(BlockFace.EAST))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()),
+						Material.PISTON_EXTENSION.getId());
+			if (e.getDirection().equals(BlockFace.WEST))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()),
+						Material.PISTON_EXTENSION.getId());
+			if (e.getDirection().equals(BlockFace.SOUTH))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1),
+						Material.PISTON_EXTENSION.getId());
+			if (e.getDirection().equals(BlockFace.NORTH))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1),
+						Material.PISTON_EXTENSION.getId());
+			if (e.getDirection().equals(BlockFace.UP))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()),
+						Material.PISTON_EXTENSION.getId());
+			if (e.getDirection().equals(BlockFace.DOWN))
+				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()),
+						Material.PISTON_EXTENSION.getId());
 		}
 	}
-	
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void onPistonRetract(BlockPistonRetractEvent e)
-	{
-		if(e.isCancelled()) return;
-		
+	public void onPistonRetract(BlockPistonRetractEvent e) {
+		if (e.isCancelled())
+			return;
+
 		Block b = e.getBlock();
-		if(Database.CheckCreative(b)) {
-			if(e.getDirection().equals(BlockFace.EAST))
+		if (Database.CheckCreative(b)) {
+			if (e.getDirection().equals(BlockFace.EAST))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()));
-			if(e.getDirection().equals(BlockFace.WEST))
+			if (e.getDirection().equals(BlockFace.WEST))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()));
-			if(e.getDirection().equals(BlockFace.SOUTH))
+			if (e.getDirection().equals(BlockFace.SOUTH))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1));
-			if(e.getDirection().equals(BlockFace.NORTH))
+			if (e.getDirection().equals(BlockFace.NORTH))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1));
-			if(e.getDirection().equals(BlockFace.UP))
+			if (e.getDirection().equals(BlockFace.UP))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()));
-			if(e.getDirection().equals(BlockFace.DOWN))
+			if (e.getDirection().equals(BlockFace.DOWN))
 				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()));
 		}
-		if(CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus))
+		if (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus))
 			blocksHandling(e.getBlocks(), e.getDirection());
-		else 	if(b.getType().equals(Material.PISTON_STICKY_BASE))
-				blockHandling(e.getRetractLocation().getBlock(), e.getDirection());
+		else if (b.getType().equals(Material.PISTON_STICKY_BASE))
+			blockHandling(e.getRetractLocation().getBlock(), e.getDirection());
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public static void blocksHandling(List<Block> blocks, BlockFace Direction) {
 		List<Block> successUpdatedBlocks = new ArrayList<Block>();
-		for(Block b : blocks) {
+		for (Block b : blocks) {
 			Database.DropBlocks(b);
-			if(Database.ifOneUpDrop(b)) {
+			if (Database.ifOneUpDrop(b)) {
 				Database.FullClear(b);
 				continue;
 			}
-			if(Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0) continue;
-			
+			if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
+				continue;
+
 			Block newCreativeBlock = null;
-			
-			if(Direction.equals(BlockFace.EAST)) 
+
+			if (Direction.equals(BlockFace.EAST))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
-			if(Direction.equals(BlockFace.WEST)) 
+			if (Direction.equals(BlockFace.WEST))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
-			if(Direction.equals(BlockFace.SOUTH)) 
+			if (Direction.equals(BlockFace.SOUTH))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
-			if(Direction.equals(BlockFace.NORTH)) 
+			if (Direction.equals(BlockFace.NORTH))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
-			if(Direction.equals(BlockFace.UP)) 
+			if (Direction.equals(BlockFace.UP))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
-			if(Direction.equals(BlockFace.DOWN)) 
+			if (Direction.equals(BlockFace.DOWN))
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ());
-			
-			if(newCreativeBlock != null) {
+
+			if (newCreativeBlock != null) {
 				Database.AddBlockMoreArguments(newCreativeBlock, b.getTypeId());
 				successUpdatedBlocks.add(newCreativeBlock);
 			}
 		}
-		
-		for(Block b : blocks) {
-			if(successUpdatedBlocks.contains(b)) continue;
+
+		for (Block b : blocks) {
+			if (successUpdatedBlocks.contains(b))
+				continue;
 			Database.RemoveBlock(b);
 		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public void blockHandling(Block b, BlockFace Direction) {
 		Database.DropBlocks(b);
-		if(Database.ifOneUpDrop(b)) {
+		if (Database.ifOneUpDrop(b)) {
 			Database.FullClear(b);
 			return;
 		}
-		if(Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0) return;
+		if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
+			return;
 		Block newCreativeBlock = null;
-			
-		if(Direction.equals(BlockFace.EAST)) 
+
+		if (Direction.equals(BlockFace.EAST))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
-		if(Direction.equals(BlockFace.WEST)) 
+		if (Direction.equals(BlockFace.WEST))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
-		if(Direction.equals(BlockFace.SOUTH)) 
+		if (Direction.equals(BlockFace.SOUTH))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
-		if(Direction.equals(BlockFace.NORTH)) 
+		if (Direction.equals(BlockFace.NORTH))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
-		if(Direction.equals(BlockFace.UP)) 
+		if (Direction.equals(BlockFace.UP))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ());
-		if(Direction.equals(BlockFace.DOWN)) 
+		if (Direction.equals(BlockFace.DOWN))
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
-			
-		if(newCreativeBlock != null) {
+
+		if (newCreativeBlock != null) {
 			Database.AddBlockMoreArguments(newCreativeBlock, b.getTypeId());
 			Database.RemoveBlock(b);
 		}

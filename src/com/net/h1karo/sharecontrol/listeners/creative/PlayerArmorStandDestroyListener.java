@@ -26,26 +26,26 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import com.net.h1karo.sharecontrol.ShareControl;
 
 public class PlayerArmorStandDestroyListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public PlayerArmorStandDestroyListener(ShareControl h)
-	{
+
+	public PlayerArmorStandDestroyListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void PlayerArmorStandDestroy(EntityDamageByEntityEvent e){
+	public void playerArmorStandDestroy(EntityDamageByEntityEvent e) {
 		if (!(e.getEntity() instanceof LivingEntity)) {
 			return;
 		}
-		
-		final LivingEntity livingEntity = (LivingEntity)e.getEntity();
-		if(!livingEntity.getType().equals(EntityType.ARMOR_STAND)){
+
+		final LivingEntity livingEntity = (LivingEntity) e.getEntity();
+		if (!livingEntity.getType().equals(EntityType.ARMOR_STAND)) {
 			return;
 		}
-		
-		if(e.getEntity().hasMetadata("ShareControl.CREATIVE_ENTITY")) {
+
+		if (e.getEntity().hasMetadata("ShareControl.CREATIVE_ENTITY")) {
 			e.setCancelled(true);
 			e.getEntity().remove();
 		}

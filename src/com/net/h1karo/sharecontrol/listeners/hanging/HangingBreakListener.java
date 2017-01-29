@@ -25,19 +25,18 @@ import org.bukkit.event.hanging.HangingBreakEvent;
 import com.net.h1karo.sharecontrol.ShareControl;
 
 public class HangingBreakListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public HangingBreakListener(ShareControl h)
-	{
+
+	public HangingBreakListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void HangingBreak(HangingBreakEvent e)
-	{
+	public void HangingBreak(HangingBreakEvent e) {
 		Entity ent = e.getEntity();
-		if(ent.hasMetadata("ShareControl.CREATIVE_ENTITY"))
+		if (ent.hasMetadata("ShareControl.CREATIVE_ENTITY"))
 			e.getEntity().remove();
 	}
 }

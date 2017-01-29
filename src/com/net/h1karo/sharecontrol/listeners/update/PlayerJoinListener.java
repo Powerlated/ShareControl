@@ -26,19 +26,16 @@ import com.net.h1karo.sharecontrol.ShareControl.UpdateResult;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerJoinListener implements Listener
-{
+public class PlayerJoinListener implements Listener {
 	private final ShareControl main;
-	
-	public PlayerJoinListener(ShareControl h)
-	{
+
+	public PlayerJoinListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void PlayerJoin(PlayerJoinEvent e)
-	{
-		if(Configuration.versionCheck && main.result == UpdateResult.UPDATE_AVAILABLE)
+	public void PlayerJoin(PlayerJoinEvent e) {
+		if (Configuration.versionCheck && main.result == UpdateResult.UPDATE_AVAILABLE)
 			Localization.UpdateFoundPlayer(e.getPlayer());
 	}
 }

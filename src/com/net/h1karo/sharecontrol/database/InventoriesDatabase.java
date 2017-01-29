@@ -29,41 +29,43 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 
 public class InventoriesDatabase {
-	
+
 	private static ShareControl main;
+
 	public InventoriesDatabase(ShareControl h) {
 		InventoriesDatabase.main = h;
-    }
-	
-	
-    private static FileConfiguration InvConfig = null;
-    private static File InvConfigFile = null;
-    
-    public static void reloadInvConfig() {
-    	if (InvConfigFile == null)	InvConfigFile = new File(Configuration.dataFolder + File.separator + "inventories.yml");
-    	
-    	InvConfig = YamlConfiguration.loadConfiguration(InvConfigFile);
-    	 
-    		InputStream defConfigStream = main.getResource(Configuration.dataFolder + File.separator + "inventories.yml");
-    		if (defConfigStream != null) {
-				@SuppressWarnings("deprecation")
-				YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-    			InvConfig.setDefaults(defConfig);
-    		}
-    	}
-    
-    public static FileConfiguration getInvConfig() {
-    	if (InvConfig == null) 	reloadInvConfig();
-    	return InvConfig;
-    	}
-    
-    public static void saveInvConfig() {
-    	if (InvConfig == null || InvConfigFile == null) return;
-    	try {
-    		getInvConfig().save(InvConfigFile);
-    	} 
-    	catch (IOException ex) {
-    		main.getLogger().log(Level.WARNING, "Could not save config to " + InvConfigFile, ex);
-    	}
-    }
+	}
+
+	private static FileConfiguration InvConfig = null;
+	private static File InvConfigFile = null;
+
+	public static void reloadInvConfig() {
+		if (InvConfigFile == null)
+			InvConfigFile = new File(Configuration.dataFolder + File.separator + "inventories.yml");
+
+		InvConfig = YamlConfiguration.loadConfiguration(InvConfigFile);
+
+		InputStream defConfigStream = main.getResource(Configuration.dataFolder + File.separator + "inventories.yml");
+		if (defConfigStream != null) {
+			@SuppressWarnings("deprecation")
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+			InvConfig.setDefaults(defConfig);
+		}
+	}
+
+	public static FileConfiguration getInvConfig() {
+		if (InvConfig == null)
+			reloadInvConfig();
+		return InvConfig;
+	}
+
+	public static void saveInvConfig() {
+		if (InvConfig == null || InvConfigFile == null)
+			return;
+		try {
+			getInvConfig().save(InvConfigFile);
+		} catch (IOException ex) {
+			main.getLogger().log(Level.WARNING, "Could not save config to " + InvConfigFile, ex);
+		}
+	}
 }

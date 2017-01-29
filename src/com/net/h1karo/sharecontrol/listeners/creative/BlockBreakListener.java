@@ -32,41 +32,46 @@ import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
 public class BlockBreakListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public BlockBreakListener(ShareControl h)
-	{
+
+	public BlockBreakListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void CreativeBlockBreak(BlockBreakEvent e)
-	{
+	public void creativeBlockBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() != GameMode.CREATIVE || e.isCancelled()) return;
+		if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled())
+			return;
 		Block b = e.getBlock();
 		Database.RemoveBlock(b);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void DisableBlockBreak(BlockBreakEvent e) {
-    	if(e.isCancelled() || Configuration.BlockingBlocksBreakList.contains("none") || e.getBlock() == null) return;
-    	Player p = e.getPlayer();
-    	Block b = e.getBlock();
-		if(Permissions.perms(p, "allow.blocking-breakage.*") || p.getGameMode() != GameMode.CREATIVE)	return;
-		if((Configuration.BlockingBlocksBreakList.contains(b.getTypeId()) && !Permissions.perms(p, "allow.blocking-breakage." + b.getTypeId())) || (Configuration.BlockingBlocksBreakList.contains(b.getType().toString()) && !Permissions.perms(p, "allow.blocking-breakage." + b.getType().toString()))) {
+	public void disableBlockBreak(BlockBreakEvent e) {
+		if (e.isCancelled() || Configuration.BlockingBlocksBreakList.contains("none") || e.getBlock() == null)
+			return;
+		Player p = e.getPlayer();
+		Block b = e.getBlock();
+		if (Permissions.perms(p, "allow.blocking-breakage.*") || p.getGameMode() != GameMode.CREATIVE)
+			return;
+		if ((Configuration.BlockingBlocksBreakList.contains(b.getTypeId())
+				&& !Permissions.perms(p, "allow.blocking-breakage." + b.getTypeId()))
+				|| (Configuration.BlockingBlocksBreakList.contains(b.getType().toString())
+						&& !Permissions.perms(p, "allow.blocking-breakage." + b.getType().toString()))) {
 			Localization.BreakBlock(b.getType(), p);
 			e.setCancelled(true);
 		}
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onAutoBreak(BlockBreakEvent e)
-	{
-		if(e.isCancelled()) return;
-		
+	public void onAutoBreak(BlockBreakEvent e) {
+		if (e.isCancelled())
+			return;
+
 		Block b = e.getBlock();
 		Database.DropBlocks(b);
 	}

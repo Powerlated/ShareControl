@@ -29,19 +29,18 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 
 public class BlockPlaceListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public BlockPlaceListener(ShareControl h)
-	{
+
+	public BlockPlaceListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
-	public void SurvivalBlockPlace(BlockPlaceEvent e)
-	{
+	public void SurvivalBlockPlace(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE || e.isCancelled())
+		if (p.getGameMode() == GameMode.CREATIVE || e.isCancelled())
 			return;
 		Block b = e.getBlockPlaced();
 		Database.cactusClear(b);

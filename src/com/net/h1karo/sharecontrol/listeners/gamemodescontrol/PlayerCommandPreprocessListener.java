@@ -26,46 +26,62 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerCommandPreprocessListener implements Listener
-{
+public class PlayerCommandPreprocessListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerCommandPreprocessListener(ShareControl h)
-	{
+
+	public PlayerCommandPreprocessListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
 	public void PlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
-		if(!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*") || e.isCancelled()) return;
-		if(!Permissions.perms(e.getPlayer(), "gamemodescontrol.survival")) {
-			if(e.getMessage().equalsIgnoreCase("/gamemode 0") || e.getMessage().equalsIgnoreCase("/gamemode s") || e.getMessage().toLowerCase().contains("/gamemode survi") || e.getMessage().equalsIgnoreCase("/gm 0") || e.getMessage().equalsIgnoreCase("/gm s") || e.getMessage().toLowerCase().contains("/gm survi") ) 
-				if(!ShareControl.getFoundEssentials() || (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
+		if (!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")
+				|| e.isCancelled())
+			return;
+		if (!Permissions.perms(e.getPlayer(), "gamemodescontrol.survival")) {
+			if (e.getMessage().equalsIgnoreCase("/gamemode 0") || e.getMessage().equalsIgnoreCase("/gamemode s")
+					|| e.getMessage().toLowerCase().contains("/gamemode survi")
+					|| e.getMessage().equalsIgnoreCase("/gm 0") || e.getMessage().equalsIgnoreCase("/gm s")
+					|| e.getMessage().toLowerCase().contains("/gm survi"))
+				if (!ShareControl.getFoundEssentials()
+						|| (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
 					Localization.NotAllowedGamemode(e.getPlayer(), "survival");
 					e.setCancelled(true);
 				}
 		}
-		
-		if(!Permissions.perms(e.getPlayer(), "gamemodescontrol.creative")) {
-			if(e.getMessage().equalsIgnoreCase("/gamemode 1") || e.getMessage().equalsIgnoreCase("/gamemode c") || e.getMessage().toLowerCase().contains("/gamemode creat") || e.getMessage().equalsIgnoreCase("/gm 1") || e.getMessage().equalsIgnoreCase("/gm c") || e.getMessage().toLowerCase().contains("/gm creat") )
-				if(!ShareControl.getFoundEssentials() || (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
+
+		if (!Permissions.perms(e.getPlayer(), "gamemodescontrol.creative")) {
+			if (e.getMessage().equalsIgnoreCase("/gamemode 1") || e.getMessage().equalsIgnoreCase("/gamemode c")
+					|| e.getMessage().toLowerCase().contains("/gamemode creat")
+					|| e.getMessage().equalsIgnoreCase("/gm 1") || e.getMessage().equalsIgnoreCase("/gm c")
+					|| e.getMessage().toLowerCase().contains("/gm creat"))
+				if (!ShareControl.getFoundEssentials()
+						|| (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
 					Localization.NotAllowedGamemode(e.getPlayer(), "creative");
 					e.setCancelled(true);
 				}
 		}
-		
-		if(!Permissions.perms(e.getPlayer(), "gamemodescontrol.adventure")) {
-			if(e.getMessage().equalsIgnoreCase("/gamemode 2") || e.getMessage().equalsIgnoreCase("/gamemode a") || e.getMessage().toLowerCase().contains("/gamemode advent") || e.getMessage().equalsIgnoreCase("/gm 2") || e.getMessage().equalsIgnoreCase("/gm a") || e.getMessage().toLowerCase().contains("/gm advent") )
-				if(!ShareControl.getFoundEssentials() || (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
+
+		if (!Permissions.perms(e.getPlayer(), "gamemodescontrol.adventure")) {
+			if (e.getMessage().equalsIgnoreCase("/gamemode 2") || e.getMessage().equalsIgnoreCase("/gamemode a")
+					|| e.getMessage().toLowerCase().contains("/gamemode advent")
+					|| e.getMessage().equalsIgnoreCase("/gm 2") || e.getMessage().equalsIgnoreCase("/gm a")
+					|| e.getMessage().toLowerCase().contains("/gm advent"))
+				if (!ShareControl.getFoundEssentials()
+						|| (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
 					Localization.NotAllowedGamemode(e.getPlayer(), "adventure");
 					e.setCancelled(true);
 				}
 		}
-		
-		if(!Permissions.perms(e.getPlayer(), "gamemodescontrol.spectator")) {
-			if(e.getMessage().equalsIgnoreCase("/gamemode 3") || e.getMessage().equalsIgnoreCase("/gamemode sp") || e.getMessage().toLowerCase().contains("/gamemode spect") || e.getMessage().equalsIgnoreCase("/gm 3") || e.getMessage().equalsIgnoreCase("/gm sp") || e.getMessage().toLowerCase().contains("/gm spect") )
-				if(!ShareControl.getFoundEssentials() || (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
+
+		if (!Permissions.perms(e.getPlayer(), "gamemodescontrol.spectator")) {
+			if (e.getMessage().equalsIgnoreCase("/gamemode 3") || e.getMessage().equalsIgnoreCase("/gamemode sp")
+					|| e.getMessage().toLowerCase().contains("/gamemode spect")
+					|| e.getMessage().equalsIgnoreCase("/gm 3") || e.getMessage().equalsIgnoreCase("/gm sp")
+					|| e.getMessage().toLowerCase().contains("/gm spect"))
+				if (!ShareControl.getFoundEssentials()
+						|| (ShareControl.getFoundEssentials() && e.getPlayer().hasPermission("essentials.gamemode"))) {
 					Localization.NotAllowedGamemode(e.getPlayer(), "spectator");
 					e.setCancelled(true);
 				}

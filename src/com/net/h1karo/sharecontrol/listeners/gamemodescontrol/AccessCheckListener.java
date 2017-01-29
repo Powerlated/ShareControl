@@ -38,71 +38,84 @@ import com.net.h1karo.sharecontrol.localization.Localization;
 import com.net.h1karo.sharecontrol.version.CoreVersion;
 
 public class AccessCheckListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public AccessCheckListener(ShareControl h)
-	{
+
+	public AccessCheckListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void BlockBreak(BlockBreakEvent e) {
-		if(!Configuration.GamemodesControlEnabled || e.isCancelled() || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")) return;
+		if (!Configuration.GamemodesControlEnabled || e.isCancelled()
+				|| Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
+			return;
 		AccessCheck(e.getPlayer());
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void BlockPlace(BlockPlaceEvent e) {
-		if(!Configuration.GamemodesControlEnabled || e.isCancelled() || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")) return;
+		if (!Configuration.GamemodesControlEnabled || e.isCancelled()
+				|| Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
+			return;
 		AccessCheck(e.getPlayer());
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void EntityDamageByEntity(EntityDamageByEntityEvent e) {
-		if(e.isCancelled() || !Configuration.GamemodesControlEnabled) return;
+		if (e.isCancelled() || !Configuration.GamemodesControlEnabled)
+			return;
 		Entity entDamager = e.getDamager();
 		Entity entDamage = e.getEntity();
-		if(!(entDamager instanceof Player) || (!(entDamage instanceof Creature) && !(entDamage.toString() == "CraftSlime")) || Permissions.perms((Player) e.getDamager(), "gamemodescontrol.*")) return;
+		if (!(entDamager instanceof Player)
+				|| (!(entDamage instanceof Creature) && !(entDamage.toString() == "CraftSlime"))
+				|| Permissions.perms((Player) e.getDamager(), "gamemodescontrol.*"))
+			return;
 		Player p = (Player) e.getDamager();
 		AccessCheck(p);
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void PlayerChangedWorld(PlayerChangedWorldEvent e) {
-		if(!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")) return;
+		if (!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
+			return;
 		AccessCheck(e.getPlayer());
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void InventoryClick(InventoryClickEvent e) {
-		if(e.isCancelled() || !Configuration.GamemodesControlEnabled || Permissions.perms((Player) e.getWhoClicked(), "gamemodescontrol.*")) return;
+		if (e.isCancelled() || !Configuration.GamemodesControlEnabled
+				|| Permissions.perms((Player) e.getWhoClicked(), "gamemodescontrol.*"))
+			return;
 		AccessCheck((Player) e.getWhoClicked());
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void InventoryOpen(InventoryOpenEvent e) {
-		if(e.isCancelled() || !Configuration.GamemodesControlEnabled || Permissions.perms((Player) e.getPlayer(), "gamemodescontrol.*")) return;
+		if (e.isCancelled() || !Configuration.GamemodesControlEnabled
+				|| Permissions.perms((Player) e.getPlayer(), "gamemodescontrol.*"))
+			return;
 		AccessCheck((Player) e.getPlayer());
 	}
-	
+
 	public static void AccessCheck(Player p) {
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "gamemodescontrol.creative")) {
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "gamemodescontrol.creative")) {
 			p.setGameMode(GameMode.SURVIVAL);
 			Localization.NotAllowedGamemode(p, "creative");
 		}
-		
-		if(p.getGameMode() == GameMode.SURVIVAL && !Permissions.perms(p, "gamemodescontrol.survival")) {
+
+		if (p.getGameMode() == GameMode.SURVIVAL && !Permissions.perms(p, "gamemodescontrol.survival")) {
 			p.setGameMode(GameMode.CREATIVE);
 			Localization.NotAllowedGamemode(p, "survival");
 		}
-		
-		if(p.getGameMode() == GameMode.ADVENTURE && !Permissions.perms(p, "gamemodescontrol.adventure")) {
+
+		if (p.getGameMode() == GameMode.ADVENTURE && !Permissions.perms(p, "gamemodescontrol.adventure")) {
 			p.setGameMode(GameMode.SURVIVAL);
 			Localization.NotAllowedGamemode(p, "adventure");
 		}
-		if(CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus))
-			if(p.getGameMode() == GameMode.SPECTATOR && !Permissions.perms(p, "gamemodescontrol.spectator")) {
+		if (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus))
+			if (p.getGameMode() == GameMode.SPECTATOR && !Permissions.perms(p, "gamemodescontrol.spectator")) {
 				p.setGameMode(GameMode.SURVIVAL);
 				Localization.NotAllowedGamemode(p, "spectator");
 			}

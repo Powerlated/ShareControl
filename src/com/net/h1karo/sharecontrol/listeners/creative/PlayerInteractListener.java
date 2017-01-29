@@ -41,123 +41,123 @@ import com.net.h1karo.sharecontrol.version.CoreVersion;
 public class PlayerInteractListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
+
 	public PlayerInteractListener(ShareControl h) {
 		this.main = h;
 	}
-    
+
 	boolean ifOpen = false;
-	
-    @EventHandler(priority = EventPriority.HIGH)
+
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onInteract(PlayerInteractEvent e) {
-    	if(e.isCancelled()) return;
-    	
-    	Player p = e.getPlayer();
-		if(Permissions.perms(p, "allow.open-inventory") || e.getPlayer().getGameMode() != GameMode.CREATIVE)	return;
-		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if(!isChestInventory(e.getClickedBlock().getType())) return;
-			
+		if (e.isCancelled())
+			return;
+
+		Player p = e.getPlayer();
+		if (Permissions.perms(p, "allow.open-inventory") || e.getPlayer().getGameMode() != GameMode.CREATIVE)
+			return;
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (!isChestInventory(e.getClickedBlock().getType()))
+				return;
+
 			Localization.openInv(p);
 			e.setCancelled(true);
 		}
 	}
-    
-    public boolean isChestInventory(Material m) {
-		return Material.CHEST == m ||
-			Material.TRAPPED_CHEST == m || (
-				CoreVersion.getVersionsArray().contains(CoreVersion.OneDotElevenPlus) && (
-					Material.WHITE_SHULKER_BOX == m ||
-					Material.ORANGE_SHULKER_BOX == m ||
-					Material.MAGENTA_SHULKER_BOX == m ||
-					Material.LIGHT_BLUE_SHULKER_BOX == m ||
-					Material.YELLOW_SHULKER_BOX == m ||
-					Material.LIME_SHULKER_BOX == m ||
-					Material.PINK_SHULKER_BOX == m ||
-					Material.GRAY_SHULKER_BOX == m ||
-					Material.SILVER_SHULKER_BOX == m ||
-					Material.CYAN_SHULKER_BOX == m ||
-					Material.PURPLE_SHULKER_BOX == m ||
-					Material.BLUE_SHULKER_BOX == m ||
-					Material.BROWN_SHULKER_BOX == m ||
-					Material.GREEN_SHULKER_BOX == m ||
-					Material.RED_SHULKER_BOX == m ||
-					Material.BLACK_SHULKER_BOX == m
-				)
-			);
-    }
-    
-    
-    @EventHandler(priority = EventPriority.HIGH)
+
+	public boolean isChestInventory(Material m) {
+		return Material.CHEST == m || Material.TRAPPED_CHEST == m
+				|| (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotElevenPlus)
+						&& (Material.WHITE_SHULKER_BOX == m || Material.ORANGE_SHULKER_BOX == m
+								|| Material.MAGENTA_SHULKER_BOX == m || Material.LIGHT_BLUE_SHULKER_BOX == m
+								|| Material.YELLOW_SHULKER_BOX == m || Material.LIME_SHULKER_BOX == m
+								|| Material.PINK_SHULKER_BOX == m || Material.GRAY_SHULKER_BOX == m
+								|| Material.SILVER_SHULKER_BOX == m || Material.CYAN_SHULKER_BOX == m
+								|| Material.PURPLE_SHULKER_BOX == m || Material.BLUE_SHULKER_BOX == m
+								|| Material.BROWN_SHULKER_BOX == m || Material.GREEN_SHULKER_BOX == m
+								|| Material.RED_SHULKER_BOX == m || Material.BLACK_SHULKER_BOX == m));
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onInteractJuxeBox(PlayerInteractEvent e) {
-    	if(e.isCancelled()) return;
-    	
-    	Player p = e.getPlayer();
-		if(Permissions.perms(p, "allow.open-inventory") || e.getPlayer().getGameMode() != GameMode.CREATIVE)	return;
-		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if(e.getClickedBlock().getType() != Material.JUKEBOX) return;
-					
+		if (e.isCancelled())
+			return;
+
+		Player p = e.getPlayer();
+		if (Permissions.perms(p, "allow.open-inventory") || e.getPlayer().getGameMode() != GameMode.CREATIVE)
+			return;
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (e.getClickedBlock().getType() != Material.JUKEBOX)
+				return;
+
 			Localization.interact(p);
 			e.setCancelled(true);
 		}
 	}
-    
-    @SuppressWarnings("deprecation")
+
+	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void BlockingInteractWithBlock(PlayerInteractEvent e) {
-    	if(e.isCancelled() || Configuration.BlockingInteractList.contains("none") || e.getClickedBlock() == null) return;
-    	Player p = e.getPlayer();
-    	Block b = e.getClickedBlock();
-		if(Permissions.perms(p, "allow.blocking-interact.*") || p.getGameMode() != GameMode.CREATIVE)	return;
-		if((Configuration.BlockingInteractList.contains(b.getTypeId()) && !Permissions.perms(p, "allow.blocking-interact." + b.getTypeId())) || (Configuration.BlockingInteractList.contains(b.getType().toString()) && !Permissions.perms(p, "allow.blocking-interact." + b.getType().toString()))) {
+	public void blockingInteractWithBlock(PlayerInteractEvent e) {
+		if (e.isCancelled() || Configuration.BlockingInteractList.contains("none") || e.getClickedBlock() == null)
+			return;
+		Player p = e.getPlayer();
+		Block b = e.getClickedBlock();
+		if (Permissions.perms(p, "allow.blocking-interact.*") || p.getGameMode() != GameMode.CREATIVE)
+			return;
+		if ((Configuration.BlockingInteractList.contains(b.getTypeId())
+				&& !Permissions.perms(p, "allow.blocking-interact." + b.getTypeId()))
+				|| (Configuration.BlockingInteractList.contains(b.getType().toString())
+						&& !Permissions.perms(p, "allow.blocking-interact." + b.getType().toString()))) {
 			Localization.interact(p);
 			e.setCancelled(true);
 		}
 	}
-    
-    @SuppressWarnings("deprecation")
+
+	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void BlockingUseItem(PlayerInteractEvent e) {
-    	if(e.isCancelled() || Configuration.BlockingItemsInvList.contains("none") || e.getItem() == null || e.getItem().getType().equals(Material.AIR)) return;
-    	Player p = e.getPlayer();
-    	ItemStack b = e.getItem();
-		if(Permissions.perms(p, "allow.blocking-inventory.*") || p.getGameMode() != GameMode.CREATIVE)	return;
-		if((Configuration.BlockingItemsInvList.contains(b.getTypeId()) && !Permissions.perms(p, "allow.blocking-inventory." + b.getTypeId())) || (Configuration.BlockingItemsInvList.contains(b.getType().toString()) && !Permissions.perms(p, "allow.blocking-inventory." + b.getType().toString()))) {
+	public void blockingUseItem(PlayerInteractEvent e) {
+		if (e.isCancelled() || Configuration.blockingItemsInvList.contains("none") || e.getItem() == null
+				|| e.getItem().getType().equals(Material.AIR))
+			return;
+		Player p = e.getPlayer();
+		ItemStack b = e.getItem();
+		if (Permissions.perms(p, "allow.blocking-inventory.*") || p.getGameMode() != GameMode.CREATIVE)
+			return;
+		if ((Configuration.blockingItemsInvList.contains(b.getTypeId())
+				&& !Permissions.perms(p, "allow.blocking-inventory." + b.getTypeId()))
+				|| (Configuration.blockingItemsInvList.contains(b.getType().toString())
+						&& !Permissions.perms(p, "allow.blocking-inventory." + b.getType().toString()))) {
 			Localization.invNotify(b.getType(), p);
 			p.setItemInHand(new ItemStack(Material.AIR));
 			e.setCancelled(true);
 		}
 	}
-    
-    
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onSignInteract(PlayerInteractEvent e) {
-    	Player p = e.getPlayer();
-    	if(!Configuration.EssentialsSignBlock || e.isCancelled() || Permissions.perms(p, "allow.signs") || p.getGameMode() != GameMode.CREATIVE) return;
-    	
-        if(e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-        	Block b = e.getClickedBlock();
-            if(b.getType() == Material.WALL_SIGN || b.getType() == Material.SIGN_POST) {
-                Sign sign = (Sign) b.getState();
-                String[] lines = sign.getLines();
-                
-                if(isEssentialsSigns(ChatColor.stripColor(lines[0]))) {
-                    Localization.defGood(LanguageFiles.OnEssentialsSignUse, p);
-                    e.setCancelled(true);
-                    p.setGameMode(GameMode.SURVIVAL);
-                }
-            }
-        }
-    }
-    
-    
-    
-    public boolean isEssentialsSigns(String s) {
-    	return s.equalsIgnoreCase("[Buy]") ||
-		    		s.equalsIgnoreCase("[Sell]") ||
-		    		s.equalsIgnoreCase("[Free]") ||
-		    		s.equalsIgnoreCase("[Kit]") ||
-		    		s.equalsIgnoreCase("[Disposal]") ||
-		    		s.equalsIgnoreCase("[Heal]") ||
-		    		s.equalsIgnoreCase("[Trade]");
-    }
+
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onSignInteract(PlayerInteractEvent e) {
+		Player p = e.getPlayer();
+		if (!Configuration.EssentialsSignBlock || e.isCancelled() || Permissions.perms(p, "allow.signs")
+				|| p.getGameMode() != GameMode.CREATIVE)
+			return;
+
+		if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			Block b = e.getClickedBlock();
+			if (b.getType() == Material.WALL_SIGN || b.getType() == Material.SIGN_POST) {
+				Sign sign = (Sign) b.getState();
+				String[] lines = sign.getLines();
+
+				if (isEssentialsSigns(ChatColor.stripColor(lines[0]))) {
+					Localization.defGood(LanguageFiles.OnEssentialsSignUse, p);
+					e.setCancelled(true);
+					p.setGameMode(GameMode.SURVIVAL);
+				}
+			}
+		}
+	}
+
+	public boolean isEssentialsSigns(String s) {
+		return s.equalsIgnoreCase("[Buy]") || s.equalsIgnoreCase("[Sell]") || s.equalsIgnoreCase("[Free]")
+				|| s.equalsIgnoreCase("[Kit]") || s.equalsIgnoreCase("[Disposal]") || s.equalsIgnoreCase("[Heal]")
+				|| s.equalsIgnoreCase("[Trade]");
+	}
 }

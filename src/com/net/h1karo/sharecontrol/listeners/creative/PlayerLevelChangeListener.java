@@ -25,22 +25,18 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 
-public class PlayerLevelChangeListener implements Listener
-{
+public class PlayerLevelChangeListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerLevelChangeListener(ShareControl h)
-	{
+
+	public PlayerLevelChangeListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void PlayerLevelChange(PlayerLevelChangeEvent e)
-	{
+	public void playerLevelChange(PlayerLevelChangeEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.*"))
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.*")) {
 			p.setExp(0);
 			p.setLevel(0);
 			return;

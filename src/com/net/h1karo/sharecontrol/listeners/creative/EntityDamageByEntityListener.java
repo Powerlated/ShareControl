@@ -31,42 +31,41 @@ import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.localization.Localization;
 import com.net.h1karo.sharecontrol.version.CoreVersion;
 
-public class EntityDamageByEntityListener implements Listener
-{
+public class EntityDamageByEntityListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public EntityDamageByEntityListener(ShareControl h)
-	{
+
+	public EntityDamageByEntityListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
-	public void CreativeDamageCreature(EntityDamageByEntityEvent e)
-	{
+	public void creativeDamageCreature(EntityDamageByEntityEvent e) {
 		Entity player = e.getDamager();
 		Entity entity = e.getEntity();
-		if(CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus)) {
-			if(!(player instanceof Player) || !(entity instanceof LivingEntity) || entity instanceof org.bukkit.entity.ArmorStand) return;
-		}
-		else if(!(player instanceof Player) || !(entity instanceof LivingEntity)) return;
+		if (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus)) {
+			if (!(player instanceof Player) || !(entity instanceof LivingEntity)
+					|| entity instanceof org.bukkit.entity.ArmorStand)
+				return;
+		} else if (!(player instanceof Player) || !(entity instanceof LivingEntity))
+			return;
 		Player p = (Player) e.getDamager();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact") && Configuration.CreatureInteract)
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact")
+				&& Configuration.CreatureInteract) {
 			e.setCancelled(true);
-			Localization.MonsterInteractNotify(p);
+			Localization.monsterInteractNotify(p);
 		}
 	}
-	
+
 	@EventHandler
-	public void CreativeDamagePlayer(EntityDamageByEntityEvent e)
-	{
+	public void creativeDamagePlayer(EntityDamageByEntityEvent e) {
 		Entity entDamager = e.getDamager();
 		Entity entDamage = e.getEntity();
-		if(!(entDamager instanceof Player) || !(entDamage instanceof Player)) return;
+		if (!(entDamager instanceof Player) || !(entDamage instanceof Player))
+			return;
 		Player p = (Player) e.getDamager();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.player-interact") && Configuration.PlayerInteract)
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.player-interact")
+				&& Configuration.PlayerInteract) {
 			e.setCancelled(true);
 			Localization.PlayerInteractNotify(p);
 		}

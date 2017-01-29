@@ -27,23 +27,20 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class EntityShootBowListener implements Listener
-{
+public class EntityShootBowListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public EntityShootBowListener(ShareControl h)
-	{
+
+	public EntityShootBowListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
-	public void EntityShootBow(EntityShootBowEvent e)
-	{
-		if(!(e.getEntity() instanceof Player) || e.isCancelled()) return;
+	public void entityShootBow(EntityShootBowEvent e) {
+		if (!(e.getEntity() instanceof Player) || e.isCancelled())
+			return;
 		Player p = (Player) e.getEntity();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact"))
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact")) {
 			e.setCancelled(true);
 			Localization.Bow(p);
 			return;

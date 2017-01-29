@@ -26,21 +26,20 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerFishListener implements Listener
-{
+public class PlayerFishListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerFishListener(ShareControl h)
-	{
+
+	public PlayerFishListener(ShareControl h) {
 		this.main = h;
 	}
 
 	@EventHandler
 	public void PlayerFish(PlayerFishEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.fishing")) return;
-		Localization.Fishing(p);
+		if (p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.fishing"))
+			return;
+		Localization.fishing(p);
 		e.setCancelled(true);
 	}
 }

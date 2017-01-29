@@ -26,43 +26,56 @@ import org.bukkit.plugin.PluginManager;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 
 public class Permissions {
-	
-	public static boolean perms(Player p, String per)
-	{
-		if(p.hasPermission("sharecontrol." + per)) return true;
-		else return false;
+
+	public static boolean perms(Player p, String per) {
+		if (p.hasPermission("sharecontrol." + per))
+			return true;
+		else
+			return false;
 	}
-	
+
 	public static void RegisterCustomPermissions() {
 		PluginManager pm = Bukkit.getPluginManager();
-		
-        /**\\**//**\\**//**\\**/
-      /**\     BREAK LIST     /**\
-        /**\\**//**\\**//**\\**/
-		if(Configuration.BlockingBlocksBreakList.toArray().length != 0  && Configuration.BlockingBlocksBreakList.get(0).toString() != "[none]")
-			for(String material : Configuration.BlockingBlocksBreakList) {
+
+		/** \\ **/
+		/** \\ **//** \\ **/
+		/**
+		 * \ BREAK LIST /**\ /**\\
+		 **/
+		/** \\ **//** \\ **/
+		if (Configuration.BlockingBlocksBreakList.toArray().length != 0
+				&& Configuration.BlockingBlocksBreakList.get(0).toString() != "[none]")
+			for (String material : Configuration.BlockingBlocksBreakList) {
 				Permission newperm = new Permission("sharecontrol.allow.blocking-breakage." + material.toLowerCase());
 				pm.addPermission(newperm);
 				newperm.setDefault(PermissionDefault.OP);
 				newperm.setDescription("Allow break block " + material + " from list of blocking blocks");
 			}
-		
-        /**\\**//**\\**//**\\**/
-      /**\     PLACE LIST     /**\
-        /**\\**//**\\**//**\\**/
-		if(Configuration.BlockingBlocksPlaceList.toArray().length != 0  && Configuration.BlockingBlocksPlaceList.get(0).toString() != "[none]")
-			for(String material : Configuration.BlockingBlocksPlaceList) {
+
+		/** \\ **/
+		/** \\ **//** \\ **/
+		/**
+		 * \ PLACE LIST /**\ /**\\
+		 **/
+		/** \\ **//** \\ **/
+		if (Configuration.BlockingBlocksPlaceList.toArray().length != 0
+				&& Configuration.BlockingBlocksPlaceList.get(0).toString() != "[none]")
+			for (String material : Configuration.BlockingBlocksPlaceList) {
 				Permission newperm = new Permission("sharecontrol.allow.blocking-placement." + material.toLowerCase());
 				pm.addPermission(newperm);
 				newperm.setDefault(PermissionDefault.OP);
 				newperm.setDescription("Allow place block " + material + " from list of blocking blocks");
 			}
-		
-        /**\\**//**\\**//**\\**/
-      /**\     ITEM LIST     /**\
-        /**\\**//**\\**//**\\**/
-		if(Configuration.BlockingItemsInvList.toArray().length != 0  && Configuration.BlockingItemsInvList.get(0).toString() != "[none]")
-			for(String material : Configuration.BlockingItemsInvList) {
+
+		/** \\ **/
+		/** \\ **//** \\ **/
+		/**
+		 * \ ITEM LIST /**\ /**\\
+		 **/
+		/** \\ **//** \\ **/
+		if (Configuration.blockingItemsInvList.toArray().length != 0
+				&& Configuration.blockingItemsInvList.get(0).toString() != "[none]")
+			for (String material : Configuration.blockingItemsInvList) {
 				Permission newperm = new Permission("sharecontrol.allow.blocking-inventory." + material.toLowerCase());
 				pm.addPermission(newperm);
 				newperm.setDefault(PermissionDefault.OP);

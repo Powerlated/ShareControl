@@ -26,21 +26,18 @@ import org.bukkit.event.block.BlockFromToEvent;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 
-public class BlockFromToListener implements Listener
-{
+public class BlockFromToListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public BlockFromToListener(ShareControl h)
-	{
+
+	public BlockFromToListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
 	public void WaterBreakBlock(BlockFromToEvent e) {
 		Block b = e.getToBlock();
-		if(Database.ifWaterDrop(b) && Database.CheckCreative(b))
-		{
+		if (Database.ifWaterDrop(b) && Database.CheckCreative(b)) {
 			e.setCancelled(true);
 			b.setType(Material.AIR);
 			Database.RemoveBlock(b);

@@ -35,37 +35,39 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 
 public class PlayerArmorStandSpawnListener implements Listener {
-	
+
 	private final ShareControl main;
-	public PlayerArmorStandSpawnListener(ShareControl h)
-	{
+
+	public PlayerArmorStandSpawnListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	boolean sync = false;
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void PlayerArmorStandSpawn(EntitySpawnEvent e)
-	{
-		if(e.isCancelled() || !sync) return;
+	public void playerArmorStandSpawn(EntitySpawnEvent e) {
+		if (e.isCancelled() || !sync)
+			return;
 		Entity ent = e.getEntity();
-		if(ent instanceof ArmorStand) {
+		if (ent instanceof ArmorStand) {
 			ent.setMetadata("ShareControl.CREATIVE_ENTITY", new FixedMetadataValue(main, "true"));
 		}
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void PlayerArmorStandSpawn(PlayerInteractEvent e)
-	{
+	public void playerArmorStandSpawn(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() != GameMode.CREATIVE || e.isCancelled() || Permissions.perms(p, "allow.notlogging")) return;
-		if(p.getItemInHand().getType() == Material.ARMOR_STAND) {
+		if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled() || Permissions.perms(p, "allow.notlogging"))
+			return;
+		if (p.getInventory().getItemInMainHand().getType() == Material.ARMOR_STAND) {
 			sync = true;
 			BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 			scheduler.scheduleSyncDelayedTask(main, new Runnable() {
 				@Override
-				public void run() { sync = false; }}, 30L);
+				public void run() {
+					sync = false;
+				}
+			}, 30L);
 		}
 	}
 }

@@ -27,22 +27,20 @@ import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class StructureGrowListener implements Listener
-{
+public class StructureGrowListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public StructureGrowListener(ShareControl h)
-	{
+
+	public StructureGrowListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
 	public void StructureGrow(StructureGrowEvent e) {
-		for(BlockState b : e.getBlocks())
-			if(Database.CheckCreative(b.getBlock()) && b.getBlock().getType() == Material.SAPLING) {
+		for (BlockState b : e.getBlocks())
+			if (Database.CheckCreative(b.getBlock()) && b.getBlock().getType() == Material.SAPLING) {
 				e.setCancelled(true);
-				if(e.getPlayer() != null)
+				if (e.getPlayer() != null)
 					Localization.Saplings(e.getPlayer());
 				return;
 			}

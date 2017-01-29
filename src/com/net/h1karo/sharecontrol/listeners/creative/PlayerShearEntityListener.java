@@ -27,25 +27,22 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerShearEntityListener implements Listener
-{
+public class PlayerShearEntityListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerShearEntityListener(ShareControl h)
-	{
+
+	public PlayerShearEntityListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
-	public void PlayerShearEntity(PlayerShearEntityEvent e)
-	{
-		if(e.isCancelled()) return;
+	public void playerShearEntity(PlayerShearEntityEvent e) {
+		if (e.isCancelled())
+			return;
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact"))
-		{
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact")) {
 			e.setCancelled(true);
-			Localization.MonsterInteractNotify(p);
+			Localization.monsterInteractNotify(p);
 			return;
 		}
 	}

@@ -32,34 +32,40 @@ import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
 public class BlockPlaceListener implements Listener {
-	
+
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public BlockPlaceListener(ShareControl h)
-	{
+
+	public BlockPlaceListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void CreativeBlockPlace(BlockPlaceEvent e) {
+	public void creativeBlockPlace(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
 		Block b = e.getBlockPlaced();
-		if(p.getGameMode() != GameMode.CREATIVE || e.isCancelled()) return;
+		if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled())
+			return;
 		Database.cactusClear(b);
-		if(!Permissions.perms(p, "allow.notlogging"))
+		if (!Permissions.perms(p, "allow.notlogging"))
 			Database.AddBlock(b);
 		else
 			Database.RemoveBlock(b);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void DisableBlockPlace(BlockPlaceEvent e) {
-    	if(e.isCancelled() || Configuration.BlockingBlocksPlaceList.contains("none") || e.getBlock() == null) return;
-    	Player p = e.getPlayer();
-    	Block b = e.getBlock();
-		if(Permissions.perms(p, "allow.blocking-placement.*") || p.getGameMode() != GameMode.CREATIVE)	return;
-		if((Configuration.BlockingBlocksPlaceList.contains(b.getTypeId()) && !Permissions.perms(p, "allow.blocking-placement." + b.getTypeId())) || (Configuration.BlockingBlocksPlaceList.contains(b.getType().toString()) && !Permissions.perms(p, "allow.blocking-placement." + b.getType().toString()))) {
+	public void disableBlockPlace(BlockPlaceEvent e) {
+		if (e.isCancelled() || Configuration.BlockingBlocksPlaceList.contains("none") || e.getBlock() == null)
+			return;
+		Player p = e.getPlayer();
+		Block b = e.getBlock();
+		if (Permissions.perms(p, "allow.blocking-placement.*") || p.getGameMode() != GameMode.CREATIVE)
+			return;
+		if ((Configuration.BlockingBlocksPlaceList.contains(b.getTypeId())
+				&& !Permissions.perms(p, "allow.blocking-placement." + b.getTypeId()))
+				|| (Configuration.BlockingBlocksPlaceList.contains(b.getType().toString())
+						&& !Permissions.perms(p, "allow.blocking-placement." + b.getType().toString()))) {
 			Localization.PlaceBlock(b.getType(), p);
 			e.setCancelled(true);
 		}

@@ -27,27 +27,22 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerDropItemListener implements Listener
-{
+public class PlayerDropItemListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public PlayerDropItemListener(ShareControl h)
-	{
+
+	public PlayerDropItemListener(ShareControl h) {
 		this.main = h;
 	}
-    
+
 	@EventHandler
-	public void onDrop(PlayerDropItemEvent e)
-	{
+	public void onDrop(PlayerDropItemEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.drop"))
-		{
-			if(!InventoryClickListener.cache.contains(e.getPlayer())) {
+		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.drop")) {
+			if (!InventoryClickListener.cache.contains(e.getPlayer())) {
 				e.setCancelled(true);
 				Localization.dropNotify(p);
-			}
-			else {
+			} else {
 				InventoryClickListener.cache.remove(e.getPlayer());
 				e.getItemDrop().remove();
 				Localization.dropNotify(p);

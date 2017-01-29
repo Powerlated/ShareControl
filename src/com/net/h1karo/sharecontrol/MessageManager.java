@@ -23,54 +23,47 @@ import org.bukkit.command.CommandSender;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 
 public class MessageManager {
-	
-	private MessageManager() {};
+
+	private MessageManager() {
+	};
+
 	private static MessageManager manager = new MessageManager();
-	public static MessageManager getManager() 
-	{
+
+	public static MessageManager getManager() {
 		return manager;
 	}
-	
+
 	String latestmsg = "";
-	
-	public enum MessageType
-	{
-		INFO(ChatColor.GRAY),
-		BAD(ChatColor.RED),
-		USE(ChatColor.GRAY),
-		PLAYERS(ChatColor.GRAY),
-		PLINFO(ChatColor.GRAY),
-		HELP(ChatColor.GRAY),
-		ERROR(ChatColor.DARK_RED),
-		UPDATE(ChatColor.GRAY);
-		
+
+	public enum MessageType {
+		INFO(ChatColor.GRAY), BAD(ChatColor.RED), USE(ChatColor.GRAY), PLAYERS(ChatColor.GRAY), PLINFO(
+				ChatColor.GRAY), HELP(ChatColor.GRAY), ERROR(ChatColor.DARK_RED), UPDATE(ChatColor.GRAY);
+
 		private ChatColor color;
-		MessageType(ChatColor color)
-		{
+
+		MessageType(ChatColor color) {
 			this.color = color;
 		}
-		
-		public ChatColor getColor()
-		{
+
+		public ChatColor getColor() {
 			return color;
 		}
 	}
-	
-	public static String prefix = ChatColor.GRAY + "[" + ChatColor.BLUE + "Share" + ChatColor.WHITE + "Control" + ChatColor.GRAY + "] " + ChatColor.RESET;
-	public void msg(CommandSender sender, MessageType type, String... msgs)
-	{
-		for(String msg : msgs)
-		{
-			if(Configuration.PrefixEnabled) {
-				if(type != MessageType.HELP)
+
+	public static String prefix = ChatColor.GRAY + "[" + ChatColor.BLUE + "Share" + ChatColor.WHITE + "Control"
+			+ ChatColor.GRAY + "] " + ChatColor.RESET;
+
+	public void msg(CommandSender sender, MessageType type, String... msgs) {
+		for (String msg : msgs) {
+			if (Configuration.PrefixEnabled) {
+				if (type != MessageType.HELP)
 					sender.sendMessage(prefix + type.getColor() + msg);
-				else 
+				else
 					sender.sendMessage(type.getColor() + msg);
-			}
-			else {
-				if(type != MessageType.HELP && type != MessageType.PLAYERS)
+			} else {
+				if (type != MessageType.HELP && type != MessageType.PLAYERS)
 					sender.sendMessage(prefix + type.getColor() + msg);
-				else 
+				else
 					sender.sendMessage(type.getColor() + msg);
 			}
 		}

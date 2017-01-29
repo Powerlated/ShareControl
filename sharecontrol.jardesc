@@ -18,6 +18,7 @@
         <file path="/ShareControl/.gitignore"/>
         <folder path="/ShareControl/target"/>
         <file path="/ShareControl/.project"/>
+        <file path="/ShareControl/plugin.yml"/>
         <file path="/ShareControl/README.md"/>
     </selectedElements>
 </jardesc>

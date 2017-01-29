@@ -30,35 +30,30 @@ import com.net.h1karo.sharecontrol.database.Database;
 public class BlockGrowListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	
-	public BlockGrowListener(ShareControl h)
-	{
+
+	public BlockGrowListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@EventHandler
 	public void BlockGrow(BlockGrowEvent e) {
 		Block newb = e.getBlock();
-		
+
 		World w = newb.getWorld();
 		int x = newb.getX(), y = newb.getY(), z = newb.getZ();
 		Block b = w.getBlockAt(x, y - 1, z);
-		
-		if(Database.CheckCreative(newb) && ifFood(newb.getType())) {
+
+		if (Database.CheckCreative(newb) && ifFood(newb.getType())) {
 			e.setCancelled(true);
 		}
-		
-		if(Database.CheckCreative(b) && (b.getType() == Material.CACTUS || b.getType() == Material.SUGAR_CANE_BLOCK)) {
+
+		if (Database.CheckCreative(b) && (b.getType() == Material.CACTUS || b.getType() == Material.SUGAR_CANE_BLOCK)) {
 			e.setCancelled(true);
 		}
 	}
-	
-	
+
 	public boolean ifFood(Material m) {
-		return m == Material.PUMPKIN_STEM || 
-			m == Material.MELON_STEM || 
-			m == Material.CROPS || 
-			m == Material.CARROT || 
-			m == Material.POTATO;
+		return m == Material.PUMPKIN_STEM || m == Material.MELON_STEM || m == Material.CROPS || m == Material.CARROT
+				|| m == Material.POTATO;
 	}
 }

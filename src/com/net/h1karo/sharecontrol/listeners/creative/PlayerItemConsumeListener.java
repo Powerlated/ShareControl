@@ -31,39 +31,36 @@ import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.database.Database;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerItemConsumeListener implements Listener
-{
+public class PlayerItemConsumeListener implements Listener {
 	@SuppressWarnings("unused")
 	private final ShareControl main;
-	public PlayerItemConsumeListener(ShareControl h)
-	{
+
+	public PlayerItemConsumeListener(ShareControl h) {
 		this.main = h;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
-	public void PlayerItemConsume(PlayerItemConsumeEvent e)
-	{
+	public void playerItemConsume(PlayerItemConsumeEvent e) {
 		Player p = (Player) e.getPlayer();
-		if(p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.blocking-inventory.*") || Configuration.BlockingItemsInvList.toArray().length == 0 || Configuration.BlockingItemsInvList.get(0).toString().compareToIgnoreCase("[none]") == 0) return;
-		for(int i=0; i < Configuration.BlockingItemsInvList.toArray().length; i++)
-		{
-			String StrListItem = (String) Configuration.BlockingItemsInvList.toArray()[i];
-			if(!Permissions.perms(p, "allow.blocking-inventory." + StrListItem)) {
+		if (p.getGameMode() != GameMode.CREATIVE || Permissions.perms(p, "allow.blocking-inventory.*")
+				|| Configuration.blockingItemsInvList.toArray().length == 0
+				|| Configuration.blockingItemsInvList.get(0).toString().compareToIgnoreCase("[none]") == 0)
+			return;
+		for (int i = 0; i < Configuration.blockingItemsInvList.toArray().length; i++) {
+			String StrListItem = (String) Configuration.blockingItemsInvList.toArray()[i];
+			if (!Permissions.perms(p, "allow.blocking-inventory." + StrListItem)) {
 				Material typeThisItem = e.getItem().getType();
 				Material typeListItem;
-				
-				if(Database.isInteger(StrListItem))
-				{
+
+				if (Database.isInteger(StrListItem)) {
 					String NewStr = StrListItem.replace("'", "");
 					int ID = Integer.parseInt(NewStr);
 					typeListItem = Material.getMaterial(ID);
-				}
-				else
+				} else
 					typeListItem = Material.getMaterial(StrListItem);
-				
-				if(typeThisItem == typeListItem)
-				{
+
+				if (typeThisItem == typeListItem) {
 					Localization.invNotify(typeThisItem, p);
 					e.setCancelled(true);
 				}

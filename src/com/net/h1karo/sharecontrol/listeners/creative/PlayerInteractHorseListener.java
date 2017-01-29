@@ -31,40 +31,41 @@ import com.net.h1karo.sharecontrol.Permissions;
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.localization.Localization;
 
-public class PlayerInteractHorseListener implements Listener
-{
+public class PlayerInteractHorseListener implements Listener {
 	private final ShareControl main;
-	
-	public PlayerInteractHorseListener(ShareControl h)
-	{
+
+	public PlayerInteractHorseListener(ShareControl h) {
 		this.main = h;
 	}
+
 	private boolean Interact = false;
 	private Player player = null;
-	
+
 	@EventHandler
-	public void InteractWithHorse(PlayerInteractEntityEvent e)
-	{	
+	public void interactWithHorse(PlayerInteractEntityEvent e) {
 		Player p = (Player) e.getPlayer();
-		if(e.getRightClicked().getType() == EntityType.HORSE && e.getPlayer().getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.blocking-inventory"))
-		{
+		if (e.getRightClicked().getType() == EntityType.HORSE && e.getPlayer().getGameMode() == GameMode.CREATIVE
+				&& !Permissions.perms(p, "allow.blocking-inventory")) {
 			Interact = true;
 			player = e.getPlayer();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-	            @Override
-	            public void run() { Interact = false; }}, 20L);
-		}	
+				@Override
+				public void run() {
+					Interact = false;
+				}
+			}, 20L);
+		}
 	}
-	
+
 	@EventHandler
-	public void InteractWithChest(InventoryOpenEvent e)
-	{	
+	public void interactWithChest(InventoryOpenEvent e) {
 		Player p = (Player) e.getPlayer();
-		if(player != null)
-			if(e.getInventory().getType() == InventoryType.CHEST && Interact && player == e.getPlayer() && e.getPlayer().getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.blocking-inventory"))
-			{
+		if (player != null)
+			if (e.getInventory().getType() == InventoryType.CHEST && Interact && player == e.getPlayer()
+					&& e.getPlayer().getGameMode() == GameMode.CREATIVE
+					&& !Permissions.perms(p, "allow.blocking-inventory")) {
 				e.setCancelled(true);
-    			Localization.openInv(p);
-			}	
+				Localization.openInv(p);
+			}
 	}
 }
