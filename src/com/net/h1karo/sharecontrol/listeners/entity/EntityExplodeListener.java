@@ -44,7 +44,7 @@ public class EntityExplodeListener implements Listener {
 			List<Block> blocks = e.blockList();
 			for (int i = 0; i < blocks.size(); i++) {
 				Block b = blocks.get(i);
-				if (Database.CheckCreative(b))
+				if (Database.isCreative(b))
 					e.blockList().remove(b);
 			}
 		}

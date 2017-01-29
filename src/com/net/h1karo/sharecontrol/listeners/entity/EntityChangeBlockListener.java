@@ -47,14 +47,14 @@ public class EntityChangeBlockListener implements Listener {
 		Block b = e.getBlock();
 		Entity eventEntity = e.getEntity();
 
-		Database.DropBlocks(b);
+		Database.dropBlocks(b);
 
 		if (eventEntity.getType().equals(EntityType.FALLING_BLOCK)) {
-			if (Database.CheckCreative(b)) {
+			if (Database.isCreative(b)) {
 				FallingBlock entity = (FallingBlock) eventEntity;
 				if (e.getTo() == Material.AIR) {
 					entity.setDropItem(false);
-					Database.RemoveBlock(b);
+					Database.removeBlock(b);
 					entity.setMetadata("ShareControl.CREATIVE_FALLING_BLOCK",
 							new FixedMetadataValue(main, b.getType().getId()));
 				}

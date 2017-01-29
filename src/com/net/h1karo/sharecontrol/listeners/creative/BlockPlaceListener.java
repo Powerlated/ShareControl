@@ -50,7 +50,7 @@ public class BlockPlaceListener implements Listener {
 		if (!Permissions.perms(p, "allow.notlogging"))
 			Database.AddBlock(b);
 		else
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 	}
 
 	@SuppressWarnings("deprecation")

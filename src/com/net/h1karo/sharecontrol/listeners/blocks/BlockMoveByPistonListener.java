@@ -50,7 +50,7 @@ public class BlockMoveByPistonListener implements Listener {
 		blocksHandling(e.getBlocks(), e.getDirection());
 
 		Block b = e.getBlock();
-		if (Database.CheckCreative(b)) {
+		if (Database.isCreative(b)) {
 			if (e.getDirection().equals(BlockFace.EAST))
 				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()),
 						Material.PISTON_EXTENSION.getId());
@@ -79,19 +79,19 @@ public class BlockMoveByPistonListener implements Listener {
 			return;
 
 		Block b = e.getBlock();
-		if (Database.CheckCreative(b)) {
+		if (Database.isCreative(b)) {
 			if (e.getDirection().equals(BlockFace.EAST))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()));
 			if (e.getDirection().equals(BlockFace.WEST))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()));
 			if (e.getDirection().equals(BlockFace.SOUTH))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1));
 			if (e.getDirection().equals(BlockFace.NORTH))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1));
 			if (e.getDirection().equals(BlockFace.UP))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()));
 			if (e.getDirection().equals(BlockFace.DOWN))
-				Database.RemoveBlock(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()));
+				Database.removeBlock(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()));
 		}
 		if (CoreVersion.getVersionsArray().contains(CoreVersion.OneDotEightPlus))
 			blocksHandling(e.getBlocks(), e.getDirection());
@@ -103,9 +103,9 @@ public class BlockMoveByPistonListener implements Listener {
 	public static void blocksHandling(List<Block> blocks, BlockFace Direction) {
 		List<Block> successUpdatedBlocks = new ArrayList<Block>();
 		for (Block b : blocks) {
-			Database.DropBlocks(b);
+			Database.dropBlocks(b);
 			if (Database.ifOneUpDrop(b)) {
-				Database.FullClear(b);
+				Database.fullClear(b);
 				continue;
 			}
 			if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
@@ -135,15 +135,15 @@ public class BlockMoveByPistonListener implements Listener {
 		for (Block b : blocks) {
 			if (successUpdatedBlocks.contains(b))
 				continue;
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
 	public void blockHandling(Block b, BlockFace Direction) {
-		Database.DropBlocks(b);
+		Database.dropBlocks(b);
 		if (Database.ifOneUpDrop(b)) {
-			Database.FullClear(b);
+			Database.fullClear(b);
 			return;
 		}
 		if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
@@ -165,7 +165,7 @@ public class BlockMoveByPistonListener implements Listener {
 
 		if (newCreativeBlock != null) {
 			Database.AddBlockMoreArguments(newCreativeBlock, b.getTypeId());
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 		}
 	}
 }

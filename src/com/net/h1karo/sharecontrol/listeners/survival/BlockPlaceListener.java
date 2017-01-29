@@ -44,6 +44,6 @@ public class BlockPlaceListener implements Listener {
 			return;
 		Block b = e.getBlockPlaced();
 		Database.cactusClear(b);
-		Database.RemoveBlock(b);
+		Database.removeBlock(b);
 	}
 }

@@ -43,11 +43,11 @@ public class BlockGrowListener implements Listener {
 		int x = newb.getX(), y = newb.getY(), z = newb.getZ();
 		Block b = w.getBlockAt(x, y - 1, z);
 
-		if (Database.CheckCreative(newb) && ifFood(newb.getType())) {
+		if (Database.isCreative(newb) && ifFood(newb.getType())) {
 			e.setCancelled(true);
 		}
 
-		if (Database.CheckCreative(b) && (b.getType() == Material.CACTUS || b.getType() == Material.SUGAR_CANE_BLOCK)) {
+		if (Database.isCreative(b) && (b.getType() == Material.CACTUS || b.getType() == Material.SUGAR_CANE_BLOCK)) {
 			e.setCancelled(true);
 		}
 	}

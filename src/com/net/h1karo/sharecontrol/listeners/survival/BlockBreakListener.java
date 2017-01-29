@@ -54,7 +54,7 @@ public class BlockBreakListener implements Listener {
 
 		if (b.getType().equals(Material.PISTON_EXTENSION)) {
 			World w = b.getWorld();
-			if (!Database.CheckCreative(b))
+			if (!Database.isCreative(b))
 				return;
 			if (b.getData() == 13 || b.getData() == 5) {
 				e.setCancelled(true);
@@ -106,11 +106,11 @@ public class BlockBreakListener implements Listener {
 			if (b.getData() == 8 || b.getData() == 9) {
 				e.setCancelled(true);
 				door = w.getBlockAt(b.getX(), b.getY() - 1, b.getZ());
-				if (Database.CheckCreative(door)) {
+				if (Database.isCreative(door)) {
 					if (!Configuration.BlockingBreak) {
 						door.setType(Material.AIR);
 						Localization.SurvivalBlockNotDrop(p);
-						Database.RemoveBlock(door);
+						Database.removeBlock(door);
 					} else {
 						Localization.SurvivalBlockNotBreak(p);
 						return;
@@ -123,13 +123,13 @@ public class BlockBreakListener implements Listener {
 	}
 
 	public void AClearBlock(Block b, BlockBreakEvent e) {
-		if (Database.CheckCreative(b)) {
+		if (Database.isCreative(b)) {
 			e.setCancelled(true);
 			if (!Configuration.BlockingBreak)
 				b.setType(Material.AIR);
 			else
 				return;
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 			return;
 		}
 	}
@@ -138,7 +138,7 @@ public class BlockBreakListener implements Listener {
 		Block b = e.getBlock();
 		Player p = e.getPlayer();
 
-		if (Database.CheckCreative(b)) {
+		if (Database.isCreative(b)) {
 			e.setCancelled(true);
 			if (!Configuration.BlockingBreak) {
 				b.setType(Material.AIR);
@@ -148,7 +148,7 @@ public class BlockBreakListener implements Listener {
 				return;
 			}
 
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 			return;
 		}
 	}

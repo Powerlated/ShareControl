@@ -109,24 +109,24 @@ public class PlayerInteractListener implements Listener {
 			}
 			Block b = e.getClickedBlock();
 
-			if (Database.CheckCreative(b) && e.getAction() == Action.LEFT_CLICK_BLOCK) {
+			if (Database.isCreative(b) && e.getAction() == Action.LEFT_CLICK_BLOCK) {
 				e.setCancelled(true);
 				Localization.CreativeTypeHas(p);
 				return;
 			}
 
-			if (!Database.CheckCreative(b) && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (!Database.isCreative(b) && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Localization.NaturalTypeHas(p);
 				return;
 			}
 
-			if (Database.CheckCreative(b) && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (Database.isCreative(b) && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Localization.NaturalTypeNow(p);
-				Database.RemoveBlock(b);
+				Database.removeBlock(b);
 				return;
 			}
 
-			if (!Database.CheckCreative(b) && e.getAction() == Action.LEFT_CLICK_BLOCK) {
+			if (!Database.isCreative(b) && e.getAction() == Action.LEFT_CLICK_BLOCK) {
 				e.setCancelled(true);
 				Localization.CreativeTypeNow(p);
 				Database.AddBlock(b);

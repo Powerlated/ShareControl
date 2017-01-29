@@ -68,9 +68,9 @@ public class BlockPlaceListener implements Listener {
 			return;
 
 		for (int j = 256; j > b.getLocation().getBlockY(); j--) {
-			Block NewB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
-			if (Database.ifUpDrop(NewB))
-				Database.FullClear(NewB);
+			Block newB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
+			if (Database.ifUpDrop(newB))
+				Database.fullClear(newB);
 		}
 	}
 }

@@ -137,7 +137,7 @@ public class Database {
 		AddBlock(b);
 	}
 
-	public static void RemoveBlock(Block b) {
+	public static void removeBlock(Block b) {
 		int x = b.getX(), y = b.getY(), z = b.getZ(), w = Bukkit.getWorlds().indexOf(b.getWorld());
 		List<Integer> key = new ArrayList<Integer>();
 		key.add(x);
@@ -153,7 +153,7 @@ public class Database {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static boolean CheckCreative(Block b) {
+	public static boolean isCreative(Block b) {
 		int x = b.getX(), y = b.getY(), z = b.getZ(), id = b.getTypeId(), w = Bukkit.getWorlds().indexOf(b.getWorld());
 		List<Integer> key = new ArrayList<Integer>();
 		key.add(x);
@@ -165,7 +165,7 @@ public class Database {
 			return true;
 		else {
 			if (fullcache.containsKey(key) && fullcache.get(key) != id)
-				RemoveBlock(b);
+				removeBlock(b);
 			return false;
 		}
 	}
@@ -189,7 +189,7 @@ public class Database {
 
 	public static boolean ListCheckCreative(List<Block> Blocks) {
 		for (Block b : Blocks) {
-			if (CheckCreative(b))
+			if (isCreative(b))
 				return true;
 		}
 		return false;
@@ -198,21 +198,21 @@ public class Database {
 	/** EXTRA **/
 
 	public static void UpdateBlockToLocation(Block b, Location l) {
-		if (!CheckCreative(b))
+		if (!isCreative(b))
 			return;
 		World w = l.getWorld();
 		AddBlock(w.getBlockAt(l));
 	}
 
-	public static void FullClear(Block b) {
-		if (!CheckCreative(b))
+	public static void fullClear(Block b) {
+		if (!isCreative(b))
 			return;
 		b.setType(Material.AIR);
-		RemoveBlock(b);
+		removeBlock(b);
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void DropBlocks(Block b) {
+	public static void dropBlocks(Block b) {
 		int h = b.getLocation().getBlockY();
 		World w = b.getWorld();
 		for (int j = b.getLocation().getBlockY() + 1; j <= Bukkit.getWorlds().get(0).getMaxHeight(); j++) {
@@ -226,64 +226,64 @@ public class Database {
 		for (int j = h; j > b.getLocation().getBlockY(); j--) {
 			Block NewB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
 			if (ifUpDrop(NewB))
-				FullClear(NewB);
+				fullClear(NewB);
 		}
 
 		Block NewB = w.getBlockAt(b.getX(), b.getY() + 1, b.getZ());
 		if (ifOneUpDrop(NewB)) {
 			if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 12)
-				FullClear(NewB);
+				fullClear(NewB);
 			if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 5)
-				FullClear(NewB);
+				fullClear(NewB);
 			if (ifLaterallyDrop(NewB) == 4
 					&& (NewB.getData() == 6 || NewB.getData() == 14 || NewB.getData() == 5 || NewB.getData() == 13))
-				FullClear(NewB);
+				fullClear(NewB);
 			if (ifLaterallyDrop(NewB) == 5 && (NewB.getData() == 5 || NewB.getData() == 13))
-				FullClear(NewB);
+				fullClear(NewB);
 		}
 
 		NewB = w.getBlockAt(b.getX() + 1, b.getY(), b.getZ());
 		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 5)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 1)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 3)
-			FullClear(NewB);
+			fullClear(NewB);
 		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 1 || NewB.getData() == 9))
-			FullClear(NewB);
+			fullClear(NewB);
 
 		NewB = w.getBlockAt(b.getX() - 1, b.getY(), b.getZ());
 		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 4)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 2)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 1)
-			FullClear(NewB);
+			fullClear(NewB);
 		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 2 || NewB.getData() == 10))
-			FullClear(NewB);
+			fullClear(NewB);
 
 		NewB = w.getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
 		if ((ifLaterallyDrop(NewB) == 1 || ifLaterallyDrop(NewB) == 2) && NewB.getData() == 3)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 0)
-			FullClear(NewB);
+			fullClear(NewB);
 		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 3 || NewB.getData() == 11))
-			FullClear(NewB);
+			fullClear(NewB);
 
 		NewB = w.getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
 		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 2)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 4)
-			FullClear(NewB);
+			fullClear(NewB);
 		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 2)
-			FullClear(NewB);
+			fullClear(NewB);
 		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 4 || NewB.getData() == 12))
-			FullClear(NewB);
+			fullClear(NewB);
 	}
 
 	public static boolean CheckBlock(Block b) {
-		if (ifWaterDrop(b) && CheckCreative(b)) {
-			FullClear(b);
+		if (ifWaterDrop(b) && isCreative(b)) {
+			fullClear(b);
 			return true;
 		}
 		return false;
@@ -293,27 +293,27 @@ public class Database {
 		Block cactus = null;
 
 		cactus = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
-		if (cactus.getType().equals(Material.CACTUS) && CheckCreative(cactus)) {
-			DropBlocks(cactus);
-			FullClear(cactus);
+		if (cactus.getType().equals(Material.CACTUS) && isCreative(cactus)) {
+			dropBlocks(cactus);
+			fullClear(cactus);
 		}
 
 		cactus = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
-		if (cactus.getType().equals(Material.CACTUS) && CheckCreative(cactus)) {
-			DropBlocks(cactus);
-			FullClear(cactus);
+		if (cactus.getType().equals(Material.CACTUS) && isCreative(cactus)) {
+			dropBlocks(cactus);
+			fullClear(cactus);
 		}
 
 		cactus = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
-		if (cactus.getType().equals(Material.CACTUS) && CheckCreative(cactus)) {
-			DropBlocks(cactus);
-			FullClear(cactus);
+		if (cactus.getType().equals(Material.CACTUS) && isCreative(cactus)) {
+			dropBlocks(cactus);
+			fullClear(cactus);
 		}
 
 		cactus = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
-		if (cactus.getType().equals(Material.CACTUS) && CheckCreative(cactus)) {
-			DropBlocks(cactus);
-			FullClear(cactus);
+		if (cactus.getType().equals(Material.CACTUS) && isCreative(cactus)) {
+			dropBlocks(cactus);
+			fullClear(cactus);
 		}
 	}
 

@@ -46,7 +46,7 @@ public class BlockBreakListener implements Listener {
 		if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled())
 			return;
 		Block b = e.getBlock();
-		Database.RemoveBlock(b);
+		Database.removeBlock(b);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -73,6 +73,6 @@ public class BlockBreakListener implements Listener {
 			return;
 
 		Block b = e.getBlock();
-		Database.DropBlocks(b);
+		Database.dropBlocks(b);
 	}
 }

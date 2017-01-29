@@ -187,7 +187,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 						for (int y = min.getBlockY(); y <= max.getBlockY(); y++)
 							for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)
 								if (w.getBlockAt(x, y, z).getType() != Material.AIR
-										&& !Database.CheckCreative(w.getBlockAt(x, y, z))) {
+										&& !Database.isCreative(w.getBlockAt(x, y, z))) {
 									Database.AddBlock(w.getBlockAt(x, y, z));
 									i++;
 								}
@@ -198,8 +198,8 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 						for (int y = min.getBlockY(); y <= max.getBlockY(); y++)
 							for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)
 								if (w.getBlockAt(x, y, z).getType() != Material.AIR
-										&& Database.CheckCreative(w.getBlockAt(x, y, z))) {
-									Database.RemoveBlock(w.getBlockAt(x, y, z));
+										&& Database.isCreative(w.getBlockAt(x, y, z))) {
+									Database.removeBlock(w.getBlockAt(x, y, z));
 									i++;
 								}
 				Localization.BlocksChanged(p, i);

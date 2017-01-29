@@ -35,12 +35,12 @@ public class BlockFromToListener implements Listener {
 	}
 
 	@EventHandler
-	public void WaterBreakBlock(BlockFromToEvent e) {
+	public void waterBreakBlock(BlockFromToEvent e) {
 		Block b = e.getToBlock();
-		if (Database.ifWaterDrop(b) && Database.CheckCreative(b)) {
+		if (Database.ifWaterDrop(b) && Database.isCreative(b)) {
 			e.setCancelled(true);
 			b.setType(Material.AIR);
-			Database.RemoveBlock(b);
+			Database.removeBlock(b);
 			return;
 		}
 	}

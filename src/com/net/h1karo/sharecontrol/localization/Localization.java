@@ -494,7 +494,7 @@ public class Localization {
 		String type;
 		String data = b.getData() + "";
 
-		if (Database.CheckCreative(b))
+		if (Database.isCreative(b))
 			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeType);
 		else
 			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.NaturalType);
