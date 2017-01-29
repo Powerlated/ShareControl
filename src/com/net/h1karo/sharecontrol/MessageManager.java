@@ -55,7 +55,7 @@ public class MessageManager {
 
 	public void msg(CommandSender sender, MessageType type, String... msgs) {
 		for (String msg : msgs) {
-			if (Configuration.PrefixEnabled) {
+			if (Configuration.prefixEnabled) {
 				if (type != MessageType.HELP)
 					sender.sendMessage(prefix + type.getColor() + msg);
 				else

@@ -88,42 +88,42 @@ public class Localization {
 	}
 
 	public static void dropNotify(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnDrop);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void monsterInteractNotify(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnMonsterInteract);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void fishing(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnFishing);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void Bow(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnBowShoot);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void PlayerInteractNotify(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnPlayerInteract);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void invNotify(Material typeThisItem, Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg;
 		String strThisItem = typeThisItem.toString().toLowerCase().replace("_", " ");
@@ -136,14 +136,14 @@ public class Localization {
 	}
 
 	public static void openInv(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnOpenOtherInventory);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void PlaceBlock(Material typeThisBlock, Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String strThisBlock = typeThisBlock.toString().toLowerCase().replace("_", " ");
 		String msg;
@@ -156,7 +156,7 @@ public class Localization {
 	}
 
 	public static void BreakBlock(Material typeThisBlock, Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String strThisBlock = typeThisBlock.toString().toLowerCase().replace("_", " ");
 		String msg;
@@ -169,28 +169,28 @@ public class Localization {
 	}
 
 	public static void InBlockWorld(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.AnotherWorld);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void SurvivalBlockNotDrop(Player p) {
-		if (!Configuration.SurvivalNotify)
+		if (!Configuration.survivalNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeBlockNotDrop);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void SurvivalBlockNotBreak(Player p) {
-		if (!Configuration.SurvivalNotify)
+		if (!Configuration.survivalNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeBlockNotBreak);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void entityUseNotify(EntityType typeThisEntity, Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String strThisItem = typeThisEntity.toString().toLowerCase().replace("_", " ");
 		String msg;
@@ -203,14 +203,14 @@ public class Localization {
 	}
 
 	public static void interact(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.UseBlocks);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void ANEntityUseNotify(EntityType typeThisEntity, Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String strThisItem = typeThisEntity.toString().toLowerCase().replace("_", " ");
 		String msg;
@@ -223,29 +223,29 @@ public class Localization {
 	}
 
 	public static void ANinteract(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.UseBlocks);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void ProhibitedCmd(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.OnCommand);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void armorStand(Player p) {
-		if (!Configuration.CreativeNotify)
+		if (!Configuration.creativeNotify)
 			return;
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.ArmorStand);
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
 	public static void Saplings(Player p) {
-		if ((Configuration.CreativeNotify && p.getGameMode() == GameMode.CREATIVE)
-				|| (Configuration.SurvivalNotify && p.getGameMode() != GameMode.CREATIVE)) {
+		if ((Configuration.creativeNotify && p.getGameMode() == GameMode.CREATIVE)
+				|| (Configuration.survivalNotify && p.getGameMode() != GameMode.CREATIVE)) {
 			String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.Saplings);
 			MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 		}
@@ -405,7 +405,7 @@ public class Localization {
 		}
 
 		if (ShareControl.error) {
-			Configuration.Error(sender);
+			Configuration.error(sender);
 		} else {
 			if (!main.checkSender(sender)) {
 				MessageManager.getManager().msg(sender, MessageType.PLINFO, msg2);

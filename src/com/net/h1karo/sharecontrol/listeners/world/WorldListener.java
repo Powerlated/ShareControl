@@ -47,16 +47,16 @@ public class WorldListener implements Listener {
 		if (e.isCancelled())
 			return;
 
-		if (!Configuration.WorldsCfgEnabled)
+		if (!Configuration.worldsCfgEnabled)
 			return;
 
 		Player p = e.getPlayer();
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			for (int i = 0; i < Configuration.BlockingCreative.toArray().length; i++) {
+			for (int i = 0; i < Configuration.blockingCreative.toArray().length; i++) {
 				if (Permissions.perms(p, "allow.blocking-creative")
-						|| Configuration.BlockingCreative.toArray()[i].toString() == "[none]")
+						|| Configuration.blockingCreative.toArray()[i].toString() == "[none]")
 					return;
-				String ListWorld = Configuration.BlockingCreative.toArray()[i].toString();
+				String ListWorld = Configuration.blockingCreative.toArray()[i].toString();
 				if (e.getBlock().getLocation().getWorld().getName().toString().compareToIgnoreCase(ListWorld) == 0) {
 					e.setCancelled(true);
 					p.setGameMode(GameMode.SURVIVAL);
@@ -72,16 +72,16 @@ public class WorldListener implements Listener {
 		if (e.isCancelled())
 			return;
 
-		if (!Configuration.WorldsCfgEnabled)
+		if (!Configuration.worldsCfgEnabled)
 			return;
 
 		Player p = e.getPlayer();
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			for (int i = 0; i < Configuration.BlockingCreative.toArray().length; i++) {
+			for (int i = 0; i < Configuration.blockingCreative.toArray().length; i++) {
 				if (Permissions.perms(p, "allow.blocking-creative")
-						|| Configuration.BlockingCreative.toArray()[i].toString() == "[none]")
+						|| Configuration.blockingCreative.toArray()[i].toString() == "[none]")
 					return;
-				String ListWorld = Configuration.BlockingCreative.toArray()[i].toString();
+				String ListWorld = Configuration.blockingCreative.toArray()[i].toString();
 				if (e.getBlock().getLocation().getWorld().getName().toString().compareToIgnoreCase(ListWorld) == 0) {
 					e.setCancelled(true);
 					p.setGameMode(GameMode.SURVIVAL);
@@ -97,7 +97,7 @@ public class WorldListener implements Listener {
 		if (e.isCancelled())
 			return;
 
-		if (!Configuration.WorldsCfgEnabled)
+		if (!Configuration.worldsCfgEnabled)
 			return;
 
 		Entity entDamager = e.getDamager();
@@ -107,11 +107,11 @@ public class WorldListener implements Listener {
 			return;
 		Player p = (Player) e.getDamager();
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			for (int i = 0; i < Configuration.BlockingCreative.toArray().length; i++) {
+			for (int i = 0; i < Configuration.blockingCreative.toArray().length; i++) {
 				if (Permissions.perms(p, "allow.blocking-creative")
-						|| Configuration.BlockingCreative.toArray()[i].toString() == "[none]")
+						|| Configuration.blockingCreative.toArray()[i].toString() == "[none]")
 					return;
-				String ListWorld = Configuration.BlockingCreative.toArray()[i].toString();
+				String ListWorld = Configuration.blockingCreative.toArray()[i].toString();
 				if (e.getDamager().getLocation().getWorld().getName().toString().compareToIgnoreCase(ListWorld) == 0) {
 					e.setCancelled(true);
 					p.setGameMode(GameMode.SURVIVAL);
@@ -125,14 +125,14 @@ public class WorldListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void ChangeWorld(PlayerChangedWorldEvent e) {
 		Player p = e.getPlayer();
-		if (!(Configuration.WorldsCfgEnabled || p.getGameMode() == GameMode.CREATIVE))
+		if (!(Configuration.worldsCfgEnabled || p.getGameMode() == GameMode.CREATIVE))
 			return;
 
-		for (int i = 0; i < Configuration.BlockingCreative.toArray().length; i++) {
+		for (int i = 0; i < Configuration.blockingCreative.toArray().length; i++) {
 			if (Permissions.perms(p, "allow.blocking-creative")
-					|| Configuration.BlockingCreative.toArray()[i].toString() == "[none]")
+					|| Configuration.blockingCreative.toArray()[i].toString() == "[none]")
 				return;
-			String ListWorld = Configuration.BlockingCreative.toArray()[i].toString();
+			String ListWorld = Configuration.blockingCreative.toArray()[i].toString();
 			if (p.getLocation().getWorld().getName().toString().compareToIgnoreCase(ListWorld) == 0)
 				p.setGameMode(GameMode.SURVIVAL);
 		}

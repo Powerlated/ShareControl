@@ -107,7 +107,7 @@ public class BlockBreakListener implements Listener {
 				e.setCancelled(true);
 				door = w.getBlockAt(b.getX(), b.getY() - 1, b.getZ());
 				if (Database.isCreative(door)) {
-					if (!Configuration.BlockingBreak) {
+					if (!Configuration.blockingBreak) {
 						door.setType(Material.AIR);
 						Localization.SurvivalBlockNotDrop(p);
 						Database.removeBlock(door);
@@ -125,7 +125,7 @@ public class BlockBreakListener implements Listener {
 	public void AClearBlock(Block b, BlockBreakEvent e) {
 		if (Database.isCreative(b)) {
 			e.setCancelled(true);
-			if (!Configuration.BlockingBreak)
+			if (!Configuration.blockingBreak)
 				b.setType(Material.AIR);
 			else
 				return;
@@ -140,7 +140,7 @@ public class BlockBreakListener implements Listener {
 
 		if (Database.isCreative(b)) {
 			e.setCancelled(true);
-			if (!Configuration.BlockingBreak) {
+			if (!Configuration.blockingBreak) {
 				b.setType(Material.AIR);
 				Localization.SurvivalBlockNotDrop(p);
 			} else {

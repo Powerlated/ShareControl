@@ -118,7 +118,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 
 		Database.autoSaveDatabase();
 		if (error)
-			Configuration.Error(null);
+			Configuration.error(null);
 
 		try {
 			MetricsLite metrics = new MetricsLite(this);

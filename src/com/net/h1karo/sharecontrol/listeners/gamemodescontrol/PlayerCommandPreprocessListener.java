@@ -36,7 +36,7 @@ public class PlayerCommandPreprocessListener implements Listener {
 
 	@EventHandler
 	public void PlayerCommandPreprocess(PlayerCommandPreprocessEvent e) {
-		if (!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")
+		if (!Configuration.gamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*")
 				|| e.isCancelled())
 			return;
 		if (!Permissions.perms(e.getPlayer(), "gamemodescontrol.survival")) {

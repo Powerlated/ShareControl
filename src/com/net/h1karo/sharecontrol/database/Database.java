@@ -95,7 +95,7 @@ public class Database {
 					main.log("Database have been background saved!");
 				}
 			}
-		}, Configuration.DBInterval * 1200, Configuration.DBInterval * 1200);
+		}, Configuration.dbInterval * 1200, Configuration.dbInterval * 1200);
 	}
 
 	/** GENERAL FUNCTION OF HANDLER **/

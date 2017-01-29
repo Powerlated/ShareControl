@@ -57,10 +57,10 @@ public class MySQL {
 			}
 			if (Configuration.database.equalsIgnoreCase("mysql")) {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				String url = "jdbc:mysql://" + Configuration.Host + ":" + Configuration.Port + "/"
+				String url = "jdbc:mysql://" + Configuration.host + ":" + Configuration.port + "/"
 						+ Configuration.dbName;
 
-				connection = DriverManager.getConnection(url, Configuration.Username, Configuration.Password);
+				connection = DriverManager.getConnection(url, Configuration.username, Configuration.password);
 				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.TableName
 						+ "` (`id` int(11) NOT NULL AUTO_INCREMENT, `x` int(11) NOT NULL,`y` int(11) NOT NULL,`z` int(11) NOT NULL, `material` int(11) NOT NULL, `world` INTEGER NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8 AUTO_INCREMENT=0");
 				console.sendMessage(" Connected to MySQL.");

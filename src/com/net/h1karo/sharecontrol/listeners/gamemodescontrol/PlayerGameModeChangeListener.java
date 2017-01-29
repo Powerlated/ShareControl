@@ -37,7 +37,7 @@ public class PlayerGameModeChangeListener implements Listener {
 
 	@EventHandler
 	public void ChangeGameMode(PlayerGameModeChangeEvent e) {
-		if (!Configuration.FullGCEnabled || !Configuration.GamemodesControlEnabled
+		if (!Configuration.fullGcEnabled || !Configuration.gamemodesControlEnabled
 				|| Permissions.perms(e.getPlayer(), "gamemodescontrol.*") || e.isCancelled())
 			return;
 		if (e.getNewGameMode() == GameMode.CREATIVE && !Permissions.perms(e.getPlayer(), "gamemodescontrol.creative")) {

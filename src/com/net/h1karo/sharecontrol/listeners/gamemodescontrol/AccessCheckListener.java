@@ -48,7 +48,7 @@ public class AccessCheckListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void BlockBreak(BlockBreakEvent e) {
-		if (!Configuration.GamemodesControlEnabled || e.isCancelled()
+		if (!Configuration.gamemodesControlEnabled || e.isCancelled()
 				|| Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
 			return;
 		AccessCheck(e.getPlayer());
@@ -56,7 +56,7 @@ public class AccessCheckListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void BlockPlace(BlockPlaceEvent e) {
-		if (!Configuration.GamemodesControlEnabled || e.isCancelled()
+		if (!Configuration.gamemodesControlEnabled || e.isCancelled()
 				|| Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
 			return;
 		AccessCheck(e.getPlayer());
@@ -64,7 +64,7 @@ public class AccessCheckListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void EntityDamageByEntity(EntityDamageByEntityEvent e) {
-		if (e.isCancelled() || !Configuration.GamemodesControlEnabled)
+		if (e.isCancelled() || !Configuration.gamemodesControlEnabled)
 			return;
 		Entity entDamager = e.getDamager();
 		Entity entDamage = e.getEntity();
@@ -78,14 +78,14 @@ public class AccessCheckListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void PlayerChangedWorld(PlayerChangedWorldEvent e) {
-		if (!Configuration.GamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
+		if (!Configuration.gamemodesControlEnabled || Permissions.perms(e.getPlayer(), "gamemodescontrol.*"))
 			return;
 		AccessCheck(e.getPlayer());
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void InventoryClick(InventoryClickEvent e) {
-		if (e.isCancelled() || !Configuration.GamemodesControlEnabled
+		if (e.isCancelled() || !Configuration.gamemodesControlEnabled
 				|| Permissions.perms((Player) e.getWhoClicked(), "gamemodescontrol.*"))
 			return;
 		AccessCheck((Player) e.getWhoClicked());
@@ -93,7 +93,7 @@ public class AccessCheckListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void InventoryOpen(InventoryOpenEvent e) {
-		if (e.isCancelled() || !Configuration.GamemodesControlEnabled
+		if (e.isCancelled() || !Configuration.gamemodesControlEnabled
 				|| Permissions.perms((Player) e.getPlayer(), "gamemodescontrol.*"))
 			return;
 		AccessCheck((Player) e.getPlayer());

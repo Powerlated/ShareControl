@@ -54,22 +54,22 @@ public class Configuration {
 		main.getConfig().set("General.Language", Language);
 
 		main.getConfig().set("General.Database", database);
-		main.getConfig().set("General.SaveInterval", DBInterval);
+		main.getConfig().set("General.SaveInterval", dbInterval);
 		main.getConfig().set("General.MySQL.TableName", TableName);
-		main.getConfig().set("General.MySQL.Host", Host);
-		main.getConfig().set("General.MySQL.Port", Port);
+		main.getConfig().set("General.MySQL.Host", host);
+		main.getConfig().set("General.MySQL.Port", port);
 		main.getConfig().set("General.MySQL.Database", dbName);
-		main.getConfig().set("General.MySQL.Username", Username);
-		main.getConfig().set("General.MySQL.Password", Password);
+		main.getConfig().set("General.MySQL.Username", username);
+		main.getConfig().set("General.MySQL.Password", password);
 
-		main.getConfig().set("Notifications.SurvivalNotify", SurvivalNotify);
-		main.getConfig().set("Notifications.CreativeNotify", CreativeNotify);
+		main.getConfig().set("Notifications.SurvivalNotify", survivalNotify);
+		main.getConfig().set("Notifications.CreativeNotify", creativeNotify);
 		main.getConfig().set("Notifications.Material", material);
-		main.getConfig().set("Notifications.PrefixEnabled", PrefixEnabled);
+		main.getConfig().set("Notifications.PrefixEnabled", prefixEnabled);
 
-		main.getConfig().set("Settings.BlockingCreatureInteract", CreatureInteract);
-		main.getConfig().set("Settings.BlockingPlayerInteract", PlayerInteract);
-		main.getConfig().set("Settings.BlockingBreak", BlockingBreak);
+		main.getConfig().set("Settings.BlockingCreatureInteract", creatureInteract);
+		main.getConfig().set("Settings.BlockingPlayerInteract", playerInteract);
+		main.getConfig().set("Settings.BlockingBreak", blockingBreak);
 		main.getConfig().set("Settings.ClearDropInInventory", clearDropInInventory);
 		main.getConfig().set("Settings.EssentialsSignBlock", EssentialsSignBlock);
 
@@ -85,11 +85,11 @@ public class Configuration {
 		main.getConfig().set("Settings.BlockingCmds.List", blockingCmdsList);
 		main.getConfig().set("Settings.BlockingCmds.Enabled", blockingCmdsEnabled);
 
-		main.getConfig().set("WorldsConfig.Enabled", WorldsCfgEnabled);
-		main.getConfig().set("WorldsConfig.BlockingCreativeInWorlds", BlockingCreative);
+		main.getConfig().set("WorldsConfig.Enabled", worldsCfgEnabled);
+		main.getConfig().set("WorldsConfig.BlockingCreativeInWorlds", blockingCreative);
 
-		main.getConfig().set("GamemodesControl.Enabled", GamemodesControlEnabled);
-		main.getConfig().set("GamemodesControl.Full", FullGCEnabled);
+		main.getConfig().set("GamemodesControl.Enabled", gamemodesControlEnabled);
+		main.getConfig().set("GamemodesControl.Full", fullGcEnabled);
 
 		main.saveConfig();
 
@@ -113,24 +113,24 @@ public class Configuration {
 		Language = main.getConfig().getString("General.Language", "en");
 
 		database = main.getConfig().getString("General.Database", "sqlite");
-		DBInterval = main.getConfig().getInt("General.SaveInterval", 5);
+		dbInterval = main.getConfig().getInt("General.SaveInterval", 5);
 		TableName = main.getConfig().getString("General.MySQL.TableName", "blocks");
-		Host = main.getConfig().getString("General.MySQL.Host", "localhost");
-		Port = main.getConfig().getString("General.MySQL.Port", "3306");
+		host = main.getConfig().getString("General.MySQL.Host", "localhost");
+		port = main.getConfig().getString("General.MySQL.Port", "3306");
 		dbName = main.getConfig().getString("General.MySQL.Database", "minecraft");
-		Username = main.getConfig().getString("General.MySQL.Username", "minecraft");
-		Password = main.getConfig().getString("General.MySQL.Password", "");
+		username = main.getConfig().getString("General.MySQL.Username", "minecraft");
+		password = main.getConfig().getString("General.MySQL.Password", "");
 
-		SurvivalNotify = main.getConfig().getBoolean("Notifications.SurvivalNotify", true);
-		CreativeNotify = main.getConfig().getBoolean("Notifications.CreativeNotify", true);
+		survivalNotify = main.getConfig().getBoolean("Notifications.SurvivalNotify", true);
+		creativeNotify = main.getConfig().getBoolean("Notifications.CreativeNotify", true);
 		material = main.getConfig().getBoolean("Notifications.Material", true);
-		PrefixEnabled = main.getConfig().getBoolean("Notifications.PrefixEnabled", true);
+		prefixEnabled = main.getConfig().getBoolean("Notifications.PrefixEnabled", true);
 
 		main.getConfig().get("settings");
 
-		CreatureInteract = main.getConfig().getBoolean("Settings.BlockingCreatureInteract", true);
-		PlayerInteract = main.getConfig().getBoolean("Settings.BlockingPlayerInteract", true);
-		BlockingBreak = main.getConfig().getBoolean("Settings.BlockingBreak", true);
+		creatureInteract = main.getConfig().getBoolean("Settings.BlockingCreatureInteract", true);
+		playerInteract = main.getConfig().getBoolean("Settings.BlockingPlayerInteract", true);
+		blockingBreak = main.getConfig().getBoolean("Settings.BlockingBreak", true);
 		clearDropInInventory = main.getConfig().getBoolean("Settings.ClearDropInInventory", false);
 		EssentialsSignBlock = main.getConfig().getBoolean("Settings.EssentialsSignBlock", false);
 
@@ -156,14 +156,14 @@ public class Configuration {
 			blockingCmdsList.addAll(defBlockingCmdsList);
 		blockingCmdsEnabled = main.getConfig().getBoolean("Settings.BlockingCmds.Enabled", false);
 
-		WorldsCfgEnabled = main.getConfig().getBoolean("WorldsConfig.Enabled", false);
+		worldsCfgEnabled = main.getConfig().getBoolean("WorldsConfig.Enabled", false);
 
-		BlockingCreative = main.getConfig().getStringList("WorldsConfig.BlockingCreativeInWorlds");
-		if (BlockingCreative.isEmpty())
-			BlockingCreative.addAll(defBlockingCreative);
+		blockingCreative = main.getConfig().getStringList("WorldsConfig.BlockingCreativeInWorlds");
+		if (blockingCreative.isEmpty())
+			blockingCreative.addAll(defBlockingCreative);
 
-		GamemodesControlEnabled = main.getConfig().getBoolean("GamemodesControl.Enabled", false);
-		FullGCEnabled = main.getConfig().getBoolean("GamemodesControl.Full", true);
+		gamemodesControlEnabled = main.getConfig().getBoolean("GamemodesControl.Enabled", false);
+		fullGcEnabled = main.getConfig().getBoolean("GamemodesControl.Full", true);
 
 		InventoriesDatabase.reloadInvConfig();
 		InventoriesDatabase.saveInvConfig();
@@ -368,7 +368,7 @@ public class Configuration {
 		}
 	}
 
-	public static void Error(CommandSender sender) {
+	public static void error(CommandSender sender) {
 		String msg = "CAUTION! An error is found in the file config.yml!";
 		String msg2 = "Possible error: " + errorcode;
 
@@ -449,23 +449,23 @@ public class Configuration {
 	public static boolean versionCheck;
 	public static List<String> blockingBlocksPlaceList, blockingBlocksBreakList, blockingItemsInvList, blockingCmdsList,
 			blockingInteractList;
-	public static boolean CreatureInteract, PlayerInteract, CreativeNotify, SurvivalNotify, material, BlockingBreak,
-			PrefixEnabled, clearDropInInventory, EssentialsSignBlock;
+	public static boolean creatureInteract, playerInteract, creativeNotify, survivalNotify, material, blockingBreak,
+			prefixEnabled, clearDropInInventory, EssentialsSignBlock;
 	public static boolean MultiInventoriesEnabled, InventorySeparation;
 	public static String Language;
 
 	public static boolean blockingCmdsEnabled;
 
-	public static boolean GamemodesControlEnabled, FullGCEnabled;
+	public static boolean gamemodesControlEnabled, fullGcEnabled;
 
-	public static boolean WorldsCfgEnabled;
-	public static List<String> BlockingCreative;
+	public static boolean worldsCfgEnabled;
+	public static List<String> blockingCreative;
 
 	private static File languageFolder;
 	public static File dataFolder;
 
-	public static String database, Host, Port, dbName, Username, Password, TableName;
-	public static int DBInterval;
+	public static String database, host, port, dbName, username, password, tableName;
+	public static int dbInterval;
 
 	public static List<String> defBlockingBlocksPlaceList, defBlockingBlocksBreakList, defBlockingItemsInvList,
 			defBlockingCmdsList, defBlockingCreative, defBlockingInteractList;

@@ -51,7 +51,7 @@ public class EntityDamageByEntityListener implements Listener {
 			return;
 		Player p = (Player) e.getDamager();
 		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.creature-interact")
-				&& Configuration.CreatureInteract) {
+				&& Configuration.creatureInteract) {
 			e.setCancelled(true);
 			Localization.monsterInteractNotify(p);
 		}
@@ -65,7 +65,7 @@ public class EntityDamageByEntityListener implements Listener {
 			return;
 		Player p = (Player) e.getDamager();
 		if (p.getGameMode() == GameMode.CREATIVE && !Permissions.perms(p, "allow.player-interact")
-				&& Configuration.PlayerInteract) {
+				&& Configuration.playerInteract) {
 			e.setCancelled(true);
 			Localization.PlayerInteractNotify(p);
 		}
