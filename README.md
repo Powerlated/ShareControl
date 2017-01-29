@@ -1,21 +1,21 @@
 # ShareControl
-Control mode of creativity.
+A plugin to control players in creative mode.
 
-Official source code.
+Powerlated's fork.
 
 ##Features
 
 - MySQL and SQLite support
 - Block place/break and item use
 - Disable item drop/pickup
-- Disable TnT Explosion
-- Disable inventory interact
-- Disable pvp and mob attacking
-- Disable SnowGolem and IronGolem creation
-- Disable Creature and Chicken Eggs
-- Separate inventories to survival/creative/adventure, also, save your survival status and restores it when you back from creative.
-- If a block was placed by an creative, you can choose to nodrop or to be protected.
-- Much More! 
+- Disable TNT Explosions
+- Disable inventory interaction
+- Disable PVP and mob attacking
+- Disable Snow Golem and IronGolem creation
+- Disable Mob and Chicken Eggs
+- Separate inventories for survival/creative/adventure, also, save your survival status and restores it when you back from creative.
+- If a block was placed by a player in creative mode, you can choose to not drop it or to protect it.
+- And a lot more!
 
 ##Configuration (config.yml)
 ```YAML
