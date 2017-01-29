@@ -66,7 +66,7 @@ public class PlayerInteractEntityListener implements Listener {
 				return;
 			}
 			Player m = (Player) e.getRightClicked();
-			Localization.PlayerInfo(p, m);
+			Localization.playerInfo(p, m);
 			e.setCancelled(true);
 		}
 	}

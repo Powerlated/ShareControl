@@ -94,8 +94,8 @@ public class ShareControl extends JavaPlugin implements Listener {
 				&& !CoreVersion.getVersion().equals(CoreVersion.OneDotTen)
 				&& !CoreVersion.getVersion().equals(CoreVersion.OneDotEleven)) {
 			console.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					" &c&lYou are using an unsupported version! The plugin supports 1.7.x, 1.8.x, 1.9.x and 1.10.x versions."));
-			console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &c&lYou use at your own risk!"));
+					" &c&lYou are using an unsupported version! The plugin supports 1.7.x, 1.8.x, 1.9.x and 1.10.x."));
+			console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &c&lUse at your own risk!"));
 		}
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&', " Loading configuration..."));
 
@@ -127,7 +127,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 			getLogger().warning("Failed to submit the stats!");
 		}
 
-		Permissions.RegisterCustomPermissions();
+		Permissions.registerCustomPermissions();
 
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&', " Configuration successfully uploaded!"));
 
@@ -147,11 +147,11 @@ public class ShareControl extends JavaPlugin implements Listener {
 		}
 
 		if (beta)
-			console.sendMessage(
-					ChatColor.translateAlternateColorCodes('&', " &cWARNING!&r You use beta version of this plugin!"));
+			console.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					" &cWARNING!&r You are using a beta version of this plugin!"));
 		if (alpha)
-			console.sendMessage(
-					ChatColor.translateAlternateColorCodes('&', " &cWARNING!&r You use alpha version of this plugin!"));
+			console.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					" &cWARNING!&r You are using a version of this plugin!"));
 
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&',
 				"&7&l===================================================="));

@@ -34,7 +34,7 @@ public class Permissions {
 			return false;
 	}
 
-	public static void RegisterCustomPermissions() {
+	public static void registerCustomPermissions() {
 		PluginManager pm = Bukkit.getPluginManager();
 
 		/** \\ **/

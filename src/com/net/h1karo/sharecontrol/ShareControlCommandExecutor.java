@@ -74,7 +74,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 			}
 
 			if (args[0].equalsIgnoreCase("check") && args.length == 2) {
-				Localization.PlayerInfo(sender, Bukkit.getPlayer(args[1]));
+				Localization.playerInfo(sender, Bukkit.getPlayer(args[1]));
 				return true;
 			}
 
@@ -134,7 +134,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("set") && args.length < 2) {
-				String command = "/sc set <" + LanguageFiles.CreativeType + "/" + LanguageFiles.NaturalType + ">";
+				String command = "/sc set <" + LanguageFiles.creativeType + "/" + LanguageFiles.caturalType + ">";
 				String msg = ChatColor.translateAlternateColorCodes('&',
 						LanguageFiles.using.replace("%command%", command));
 				MessageManager.getManager().msg(sender, MessageType.USE, msg);
@@ -155,15 +155,15 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 				}
 
 				if (!args[1].startsWith("na") && !args[1].startsWith("su") && !args[1].startsWith("cr")
-						&& !args[1].startsWith(LanguageFiles.CreativeType.substring(1))
-						&& !args[1].startsWith(LanguageFiles.NaturalType.substring(1))) {
+						&& !args[1].startsWith(LanguageFiles.creativeType.substring(1))
+						&& !args[1].startsWith(LanguageFiles.caturalType.substring(1))) {
 					Localization.UnknownType(sender, args[1]);
 					return true;
 				}
 
-				WorldEditPlugin WorldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager()
+				WorldEditPlugin worldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager()
 						.getPlugin("WorldEdit");
-				Selection sel = WorldEdit.getSelection(p);
+				Selection sel = worldEdit.getSelection(p);
 
 				if (sel == null) {
 					Localization.MakeSelection(p);
@@ -182,7 +182,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 				Location min = sel.getMinimumPoint();
 				Location max = sel.getMaximumPoint();
 
-				if (args[1].startsWith("cr") || args[1].startsWith(LanguageFiles.CreativeType.substring(1)))
+				if (args[1].startsWith("cr") || args[1].startsWith(LanguageFiles.creativeType.substring(1)))
 					for (int x = min.getBlockX(); x <= max.getBlockX(); x++)
 						for (int y = min.getBlockY(); y <= max.getBlockY(); y++)
 							for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)
@@ -193,7 +193,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 								}
 
 				if (args[1].startsWith("na") || args[1].startsWith("su")
-						|| args[1].startsWith(LanguageFiles.NaturalType.substring(1)))
+						|| args[1].startsWith(LanguageFiles.caturalType.substring(1)))
 					for (int x = min.getBlockX(); x <= max.getBlockX(); x++)
 						for (int y = min.getBlockY(); y <= max.getBlockY(); y++)
 							for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)

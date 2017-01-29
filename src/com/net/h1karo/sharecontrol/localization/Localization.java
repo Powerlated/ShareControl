@@ -351,7 +351,7 @@ public class Localization {
 		command = " /sc tools infotool";
 		String msg10 = ChatColor.translateAlternateColorCodes('&',
 				LanguageFiles.menuinfotool.replace("%command%", command));
-		command = " /sc set <" + LanguageFiles.NaturalType + "/" + LanguageFiles.CreativeType + ">";
+		command = " /sc set <" + LanguageFiles.caturalType + "/" + LanguageFiles.creativeType + ">";
 		String msg11 = ChatColor.translateAlternateColorCodes('&',
 				LanguageFiles.menuselectionset.replace("%command%", command));
 		command = " /sc check <nickname>";
@@ -495,9 +495,9 @@ public class Localization {
 		String data = b.getData() + "";
 
 		if (Database.isCreative(b))
-			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeType);
+			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.creativeType);
 		else
-			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.NaturalType);
+			type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.caturalType);
 
 		String msg1 = ChatColor.translateAlternateColorCodes('&', LanguageFiles.Name.replace("%name%", material));
 		String msg2 = ChatColor.translateAlternateColorCodes('&', LanguageFiles.ID.replace("%id%", id));
@@ -517,7 +517,7 @@ public class Localization {
 		MessageManager.getManager().msg(p, MessageType.HELP, msg5);
 	}
 
-	public static void PlayerInfo(CommandSender sender, Player m) {
+	public static void playerInfo(CommandSender sender, Player m) {
 		String gamemode = m.getGameMode() + "";
 		String name = m.getDisplayName();
 		String uuid = m.getUniqueId().toString();
@@ -551,25 +551,25 @@ public class Localization {
 	}
 
 	public static void CreativeTypeNow(Player p) {
-		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeType);
+		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.creativeType);
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.BlockNow.replace("%type%", type));
 		MessageManager.getManager().msg(p, MessageType.PLINFO, msg);
 	}
 
 	public static void NaturalTypeNow(Player p) {
-		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.NaturalType);
+		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.caturalType);
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.BlockNow.replace("%type%", type));
 		MessageManager.getManager().msg(p, MessageType.PLINFO, msg);
 	}
 
 	public static void CreativeTypeHas(Player p) {
-		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.CreativeType);
+		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.creativeType);
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.BlockHas.replace("%type%", type));
 		MessageManager.getManager().msg(p, MessageType.PLINFO, msg);
 	}
 
 	public static void NaturalTypeHas(Player p) {
-		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.NaturalType);
+		String type = ChatColor.translateAlternateColorCodes('&', LanguageFiles.caturalType);
 		String msg = ChatColor.translateAlternateColorCodes('&', LanguageFiles.BlockHas.replace("%type%", type));
 		MessageManager.getManager().msg(p, MessageType.PLINFO, msg);
 	}
@@ -616,7 +616,7 @@ public class Localization {
 	}
 
 	public static void UnknownType(CommandSender sender, String type) {
-		String types = LanguageFiles.CreativeType + ", " + LanguageFiles.NaturalType;
+		String types = LanguageFiles.creativeType + ", " + LanguageFiles.caturalType;
 		String msg = ChatColor.translateAlternateColorCodes('&',
 				LanguageFiles.UnknownType.replace("%type%", type).replace("%types%", types));
 		MessageManager.getManager().msg(sender, MessageType.BAD, msg);

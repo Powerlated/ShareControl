@@ -143,8 +143,8 @@ public class LanguageFiles {
 		getLangConfig(lang).set("Tools.InfoTool.Lore.2", loreIT2);
 
 		getLangConfig(lang).set("Tools.Type", Type);
-		getLangConfig(lang).set("Tools.Types.Creative", CreativeType);
-		getLangConfig(lang).set("Tools.Types.Natural", NaturalType);
+		getLangConfig(lang).set("Tools.Types.Creative", creativeType);
+		getLangConfig(lang).set("Tools.Types.Natural", caturalType);
 		getLangConfig(lang).set("Tools.Name", Name);
 		getLangConfig(lang).set("Tools.ID", ID);
 		getLangConfig(lang).set("Tools.Data", Data);
@@ -305,8 +305,8 @@ public class LanguageFiles {
 				"&7Left or right click to get the Game Mode of a block or a player");
 		loreIT2 = getLangConfig(lang).getString("Tools.InfoTool.Lore.2", "&7Tool by %plugin%");
 		Type = getLangConfig(lang).getString("Tools.Type", "&7Type: &9%type%");
-		CreativeType = getLangConfig(lang).getString("Tools.Types.Creative", "creative");
-		NaturalType = getLangConfig(lang).getString("Tools.Types.Natural", "natural");
+		creativeType = getLangConfig(lang).getString("Tools.Types.Creative", "creative");
+		caturalType = getLangConfig(lang).getString("Tools.Types.Natural", "natural");
 		Name = getLangConfig(lang).getString("Tools.Name", "&7Name: &9%name%");
 		ID = getLangConfig(lang).getString("Tools.ID", "&7ID: &9%id%");
 		Data = getLangConfig(lang).getString("Tools.Data", "&7Data: &9%data%");
@@ -483,8 +483,8 @@ public class LanguageFiles {
 		loreIT2 = getLangConfig(lang).getString("Tools.InfoTool.Lore.2",
 				"&7Ð˜Ð½Ñ�Ñ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚ Ð¿Ð»Ð°Ð³Ð¸Ð½Ð° %plugin%");
 		Type = getLangConfig(lang).getString("Tools.Type", "&7Ð¢Ð¸Ð¿: &9%type%");
-		CreativeType = getLangConfig(lang).getString("Tools.Types.Creative", "Ñ‚Ð²Ð¾Ñ€Ñ‡ÐµÑ�ÐºÐ¸Ð¹");
-		NaturalType = getLangConfig(lang).getString("Tools.Types.Natural", "ÐµÑ�Ñ‚ÐµÑ�Ñ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹");
+		creativeType = getLangConfig(lang).getString("Tools.Types.Creative", "Ñ‚Ð²Ð¾Ñ€Ñ‡ÐµÑ�ÐºÐ¸Ð¹");
+		caturalType = getLangConfig(lang).getString("Tools.Types.Natural", "ÐµÑ�Ñ‚ÐµÑ�Ñ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹");
 		Name = getLangConfig(lang).getString("Tools.Name", "&7Ð�Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ: &9%name%");
 		ID = getLangConfig(lang).getString("Tools.ID", "&7ID: &9%id%");
 		Data = getLangConfig(lang).getString("Tools.Data", "&7Data: &9%data%");
@@ -646,8 +646,8 @@ public class LanguageFiles {
 		loreIT1 = getLangConfig(lang).getString("Tools.InfoTool.Lore.1", "&7Links- oder Rechtsklick auf den Block,");
 		loreIT2 = getLangConfig(lang).getString("Tools.InfoTool.Lore.2", "&7um Informationen zu erhalten");
 		Type = getLangConfig(lang).getString("Tools.Type", "&7Typ: &9%type%");
-		CreativeType = getLangConfig(lang).getString("Tools.Types.Creative", "kreativ");
-		NaturalType = getLangConfig(lang).getString("Tools.Types.Natural", "natÃ¼rlich");
+		creativeType = getLangConfig(lang).getString("Tools.Types.Creative", "kreativ");
+		caturalType = getLangConfig(lang).getString("Tools.Types.Natural", "natÃ¼rlich");
 		Name = getLangConfig(lang).getString("Tools.Name", "&7Name: &9%name%");
 		ID = getLangConfig(lang).getString("Tools.ID", "&7ID: &9%id%");
 		Data = getLangConfig(lang).getString("Tools.Data", "&7Data: &9%data%");
@@ -790,8 +790,8 @@ public class LanguageFiles {
 				"&7å·¦é”®æˆ–å�³é”®æŸ¥è¯¢æ–¹å�—æˆ–çŽ©å®¶çš„æ¸¸æˆ�æ¨¡å¼�");
 		loreIT2 = getLangConfig(lang).getString("Tools.InfoTool.Lore.2", "&7%plugin%çš„å·¥å…·");
 		Type = getLangConfig(lang).getString("Tools.Type", "&7ç±»åž‹: &9%type%");
-		CreativeType = getLangConfig(lang).getString("Tools.Types.Creative", "åˆ›é€ æ”¾ç½®");
-		NaturalType = getLangConfig(lang).getString("Tools.Types.Natural", "è‡ªç„¶ç”Ÿæˆ�");
+		creativeType = getLangConfig(lang).getString("Tools.Types.Creative", "åˆ›é€ æ”¾ç½®");
+		caturalType = getLangConfig(lang).getString("Tools.Types.Natural", "è‡ªç„¶ç”Ÿæˆ�");
 		Name = getLangConfig(lang).getString("Tools.Name", "&7å��ç§°: &9%name%");
 		ID = getLangConfig(lang).getString("Tools.ID", "&7ID: &9%id%");
 		Data = getLangConfig(lang).getString("Tools.Data", "&7Data: &9%data%");
@@ -857,7 +857,7 @@ public class LanguageFiles {
 	public static String namesettool, loreST1, loreST2, loreST3;
 	public static String nameinfotool, loreIT1, loreIT2;
 
-	public static String CreativeType, NaturalType, Name, Coordinates, Type, ID, Data, Nick, GM, Health, Exp, UUID,
+	public static String creativeType, caturalType, Name, Coordinates, Type, ID, Data, Nick, GM, Health, Exp, UUID,
 			World;
 
 	public static String Creative, Survival, Adventure, Spectator;
