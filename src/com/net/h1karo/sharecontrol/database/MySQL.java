@@ -51,7 +51,7 @@ public class MySQL {
 				Class.forName("org.sqlite.JDBC").newInstance();
 				connection = DriverManager
 						.getConnection("jdbc:sqlite://" + main.getDataFolder().getAbsolutePath() + "/data/blocks.db");
-				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.TableName
+				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.tableName
 						+ "` (`id` INTEGER PRIMARY KEY, `x` INTEGER NOT NULL,`y` INTEGER NOT NULL,`z` INTEGER NOT NULL,`material` INTEGER NOT NULL, `world` INTEGER NOT NULL)");
 				console.sendMessage(" Connected to SQLite.");
 			}
@@ -61,7 +61,7 @@ public class MySQL {
 						+ Configuration.dbName;
 
 				connection = DriverManager.getConnection(url, Configuration.username, Configuration.password);
-				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.TableName
+				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.tableName
 						+ "` (`id` int(11) NOT NULL AUTO_INCREMENT, `x` int(11) NOT NULL,`y` int(11) NOT NULL,`z` int(11) NOT NULL, `material` int(11) NOT NULL, `world` INTEGER NOT NULL, PRIMARY KEY (`id`)) DEFAULT CHARSET=utf8 AUTO_INCREMENT=0");
 				console.sendMessage(" Connected to MySQL.");
 			}
@@ -218,7 +218,7 @@ public class MySQL {
 			}
 		}
 
-		ResultSet resultSet = query("SELECT * FROM `" + Configuration.TableName + "` WHERE `x`='" + x + "' AND `y`='"
+		ResultSet resultSet = query("SELECT * FROM `" + Configuration.tableName + "` WHERE `x`='" + x + "' AND `y`='"
 				+ y + "' AND `z`='" + z + "' AND `world`='" + world + "'");
 
 		try {
@@ -232,13 +232,13 @@ public class MySQL {
 
 			if (sqlExist) {
 				if (id != null && Gid != id)
-					query("UPDATE `" + Configuration.TableName + "` SET `material`='" + id + "' WHERE `x`='" + x
+					query("UPDATE `" + Configuration.tableName + "` SET `material`='" + id + "' WHERE `x`='" + x
 							+ "' AND `y`='" + y + "' AND `z`='" + z + "' AND `world`='" + world + "'");
 				else if (id == null)
-					query("DELETE FROM `" + Configuration.TableName + "` WHERE `x`='" + x + "' AND `y`='" + y
+					query("DELETE FROM `" + Configuration.tableName + "` WHERE `x`='" + x + "' AND `y`='" + y
 							+ "' AND `z`='" + z + "' AND `world`='" + world + "'");
 			} else if (id != null)
-				query("INSERT INTO `" + Configuration.TableName + "`(`x`, `y`, `z`, `material`, `world`) VALUES ('" + x
+				query("INSERT INTO `" + Configuration.tableName + "`(`x`, `y`, `z`, `material`, `world`) VALUES ('" + x
 						+ "', '" + y + "', '" + z + "', '" + id + "', '" + world + "')");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -255,7 +255,7 @@ public class MySQL {
 			}
 		}
 
-		ResultSet resultSet = query("SELECT * FROM `" + Configuration.TableName + "` WHERE `x`='" + x + "' AND `y`='"
+		ResultSet resultSet = query("SELECT * FROM `" + Configuration.tableName + "` WHERE `x`='" + x + "' AND `y`='"
 				+ y + "' AND `z`='" + z + "' AND `world`='" + world + "'");
 		try {
 			while (resultSet.next())
@@ -276,7 +276,7 @@ public class MySQL {
 			}
 		}
 
-		ResultSet resultSet = query("SELECT * FROM `" + Configuration.TableName + "`");
+		ResultSet resultSet = query("SELECT * FROM `" + Configuration.tableName + "`");
 		try {
 			while (resultSet.next()) {
 				int x = resultSet.getInt("x"), y = resultSet.getInt("y"), z = resultSet.getInt("z"),

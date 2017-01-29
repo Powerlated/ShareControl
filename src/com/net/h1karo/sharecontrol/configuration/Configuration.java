@@ -55,7 +55,7 @@ public class Configuration {
 
 		main.getConfig().set("General.Database", database);
 		main.getConfig().set("General.SaveInterval", dbInterval);
-		main.getConfig().set("General.MySQL.TableName", TableName);
+		main.getConfig().set("General.MySQL.TableName", tableName);
 		main.getConfig().set("General.MySQL.Host", host);
 		main.getConfig().set("General.MySQL.Port", port);
 		main.getConfig().set("General.MySQL.Database", dbName);
@@ -114,7 +114,7 @@ public class Configuration {
 
 		database = main.getConfig().getString("General.Database", "sqlite");
 		dbInterval = main.getConfig().getInt("General.SaveInterval", 5);
-		TableName = main.getConfig().getString("General.MySQL.TableName", "blocks");
+		tableName = main.getConfig().getString("General.MySQL.TableName", "blocks");
 		host = main.getConfig().getString("General.MySQL.Host", "localhost");
 		port = main.getConfig().getString("General.MySQL.Port", "3306");
 		dbName = main.getConfig().getString("General.MySQL.Database", "minecraft");
