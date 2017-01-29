@@ -52,15 +52,15 @@ public class BlockBreakListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
 	public void disableBlockBreak(BlockBreakEvent e) {
-		if (e.isCancelled() || Configuration.BlockingBlocksBreakList.contains("none") || e.getBlock() == null)
+		if (e.isCancelled() || Configuration.blockingBlocksBreakList.contains("none") || e.getBlock() == null)
 			return;
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		if (Permissions.perms(p, "allow.blocking-breakage.*") || p.getGameMode() != GameMode.CREATIVE)
 			return;
-		if ((Configuration.BlockingBlocksBreakList.contains(b.getTypeId())
+		if ((Configuration.blockingBlocksBreakList.contains(b.getTypeId())
 				&& !Permissions.perms(p, "allow.blocking-breakage." + b.getTypeId()))
-				|| (Configuration.BlockingBlocksBreakList.contains(b.getType().toString())
+				|| (Configuration.blockingBlocksBreakList.contains(b.getType().toString())
 						&& !Permissions.perms(p, "allow.blocking-breakage." + b.getType().toString()))) {
 			Localization.BreakBlock(b.getType(), p);
 			e.setCancelled(true);

@@ -64,7 +64,7 @@ public class EntityChangeBlockListener implements Listener {
 				if (e.getTo().equals(b.getType()) && !e.getTo().equals(Material.AIR)) {
 					FallingBlock entity = (FallingBlock) eventEntity;
 					if (entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
-						Database.AddBlockMoreArguments(b,
+						Database.addBlockMoreArguments(b,
 								entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
 						entity.removeMetadata("ShareControl.CREATIVE_FALLING_BLOCK", main);
 					}
@@ -72,7 +72,7 @@ public class EntityChangeBlockListener implements Listener {
 			} else if (!e.getTo().equals(Material.AIR) && b.getType().equals(Material.AIR)) {
 				FallingBlock entity = (FallingBlock) eventEntity;
 				if (entity.hasMetadata("ShareControl.CREATIVE_FALLING_BLOCK")) {
-					Database.AddBlockMoreArguments(b,
+					Database.addBlockMoreArguments(b,
 							entity.getMetadata("ShareControl.CREATIVE_FALLING_BLOCK").get(0).asInt());
 					entity.removeMetadata("ShareControl.CREATIVE_FALLING_BLOCK", main);
 				}

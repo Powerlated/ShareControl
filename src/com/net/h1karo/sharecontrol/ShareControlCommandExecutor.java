@@ -188,7 +188,7 @@ public class ShareControlCommandExecutor implements CommandExecutor {
 							for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)
 								if (w.getBlockAt(x, y, z).getType() != Material.AIR
 										&& !Database.isCreative(w.getBlockAt(x, y, z))) {
-									Database.AddBlock(w.getBlockAt(x, y, z));
+									Database.addBlock(w.getBlockAt(x, y, z));
 									i++;
 								}
 

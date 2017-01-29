@@ -36,36 +36,36 @@ public class InventoriesDatabase {
 		InventoriesDatabase.main = h;
 	}
 
-	private static FileConfiguration InvConfig = null;
-	private static File InvConfigFile = null;
+	private static FileConfiguration invConfig = null;
+	private static File invConfigFile = null;
 
 	public static void reloadInvConfig() {
-		if (InvConfigFile == null)
-			InvConfigFile = new File(Configuration.dataFolder + File.separator + "inventories.yml");
+		if (invConfigFile == null)
+			invConfigFile = new File(Configuration.dataFolder + File.separator + "inventories.yml");
 
-		InvConfig = YamlConfiguration.loadConfiguration(InvConfigFile);
+		invConfig = YamlConfiguration.loadConfiguration(invConfigFile);
 
 		InputStream defConfigStream = main.getResource(Configuration.dataFolder + File.separator + "inventories.yml");
 		if (defConfigStream != null) {
 			@SuppressWarnings("deprecation")
 			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-			InvConfig.setDefaults(defConfig);
+			invConfig.setDefaults(defConfig);
 		}
 	}
 
 	public static FileConfiguration getInvConfig() {
-		if (InvConfig == null)
+		if (invConfig == null)
 			reloadInvConfig();
-		return InvConfig;
+		return invConfig;
 	}
 
 	public static void saveInvConfig() {
-		if (InvConfig == null || InvConfigFile == null)
+		if (invConfig == null || invConfigFile == null)
 			return;
 		try {
-			getInvConfig().save(InvConfigFile);
+			getInvConfig().save(invConfigFile);
 		} catch (IOException ex) {
-			main.getLogger().log(Level.WARNING, "Could not save config to " + InvConfigFile, ex);
+			main.getLogger().log(Level.WARNING, "Could not save config to " + invConfigFile, ex);
 		}
 	}
 }

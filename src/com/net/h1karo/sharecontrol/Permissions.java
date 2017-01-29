@@ -43,9 +43,9 @@ public class Permissions {
 		 * \ BREAK LIST /**\ /**\\
 		 **/
 		/** \\ **//** \\ **/
-		if (Configuration.BlockingBlocksBreakList.toArray().length != 0
-				&& Configuration.BlockingBlocksBreakList.get(0).toString() != "[none]")
-			for (String material : Configuration.BlockingBlocksBreakList) {
+		if (Configuration.blockingBlocksBreakList.toArray().length != 0
+				&& Configuration.blockingBlocksBreakList.get(0).toString() != "[none]")
+			for (String material : Configuration.blockingBlocksBreakList) {
 				Permission newperm = new Permission("sharecontrol.allow.blocking-breakage." + material.toLowerCase());
 				pm.addPermission(newperm);
 				newperm.setDefault(PermissionDefault.OP);
@@ -58,9 +58,9 @@ public class Permissions {
 		 * \ PLACE LIST /**\ /**\\
 		 **/
 		/** \\ **//** \\ **/
-		if (Configuration.BlockingBlocksPlaceList.toArray().length != 0
-				&& Configuration.BlockingBlocksPlaceList.get(0).toString() != "[none]")
-			for (String material : Configuration.BlockingBlocksPlaceList) {
+		if (Configuration.blockingBlocksPlaceList.toArray().length != 0
+				&& Configuration.blockingBlocksPlaceList.get(0).toString() != "[none]")
+			for (String material : Configuration.blockingBlocksPlaceList) {
 				Permission newperm = new Permission("sharecontrol.allow.blocking-placement." + material.toLowerCase());
 				pm.addPermission(newperm);
 				newperm.setDefault(PermissionDefault.OP);

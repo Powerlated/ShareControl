@@ -129,7 +129,7 @@ public class PlayerInteractListener implements Listener {
 			if (!Database.isCreative(b) && e.getAction() == Action.LEFT_CLICK_BLOCK) {
 				e.setCancelled(true);
 				Localization.CreativeTypeNow(p);
-				Database.AddBlock(b);
+				Database.addBlock(b);
 				return;
 			}
 		}

@@ -52,22 +52,22 @@ public class BlockMoveByPistonListener implements Listener {
 		Block b = e.getBlock();
 		if (Database.isCreative(b)) {
 			if (e.getDirection().equals(BlockFace.EAST))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ()),
 						Material.PISTON_EXTENSION.getId());
 			if (e.getDirection().equals(BlockFace.WEST))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ()),
 						Material.PISTON_EXTENSION.getId());
 			if (e.getDirection().equals(BlockFace.SOUTH))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1),
 						Material.PISTON_EXTENSION.getId());
 			if (e.getDirection().equals(BlockFace.NORTH))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1),
 						Material.PISTON_EXTENSION.getId());
 			if (e.getDirection().equals(BlockFace.UP))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ()),
 						Material.PISTON_EXTENSION.getId());
 			if (e.getDirection().equals(BlockFace.DOWN))
-				Database.AddBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()),
+				Database.addBlockMoreArguments(b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ()),
 						Material.PISTON_EXTENSION.getId());
 		}
 	}
@@ -108,7 +108,7 @@ public class BlockMoveByPistonListener implements Listener {
 				Database.fullClear(b);
 				continue;
 			}
-			if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
+			if (Database.CheckBlock(b) || Database.checkCreativeRough(b) == 0)
 				continue;
 
 			Block newCreativeBlock = null;
@@ -127,7 +127,7 @@ public class BlockMoveByPistonListener implements Listener {
 				newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() - 1, b.getZ());
 
 			if (newCreativeBlock != null) {
-				Database.AddBlockMoreArguments(newCreativeBlock, b.getTypeId());
+				Database.addBlockMoreArguments(newCreativeBlock, b.getTypeId());
 				successUpdatedBlocks.add(newCreativeBlock);
 			}
 		}
@@ -146,7 +146,7 @@ public class BlockMoveByPistonListener implements Listener {
 			Database.fullClear(b);
 			return;
 		}
-		if (Database.CheckBlock(b) || Database.CheckCreativeRough(b) == 0)
+		if (Database.CheckBlock(b) || Database.checkCreativeRough(b) == 0)
 			return;
 		Block newCreativeBlock = null;
 
@@ -164,7 +164,7 @@ public class BlockMoveByPistonListener implements Listener {
 			newCreativeBlock = b.getWorld().getBlockAt(b.getX(), b.getY() + 1, b.getZ());
 
 		if (newCreativeBlock != null) {
-			Database.AddBlockMoreArguments(newCreativeBlock, b.getTypeId());
+			Database.addBlockMoreArguments(newCreativeBlock, b.getTypeId());
 			Database.removeBlock(b);
 		}
 	}

@@ -47,7 +47,7 @@ public class MySQL {
 				main.getDataFolder().mkdirs();
 			}
 
-			if (Configuration.Database.equalsIgnoreCase("sqlite")) {
+			if (Configuration.database.equalsIgnoreCase("sqlite")) {
 				Class.forName("org.sqlite.JDBC").newInstance();
 				connection = DriverManager
 						.getConnection("jdbc:sqlite://" + main.getDataFolder().getAbsolutePath() + "/data/blocks.db");
@@ -55,10 +55,10 @@ public class MySQL {
 						+ "` (`id` INTEGER PRIMARY KEY, `x` INTEGER NOT NULL,`y` INTEGER NOT NULL,`z` INTEGER NOT NULL,`material` INTEGER NOT NULL, `world` INTEGER NOT NULL)");
 				console.sendMessage(" Connected to SQLite.");
 			}
-			if (Configuration.Database.equalsIgnoreCase("mysql")) {
+			if (Configuration.database.equalsIgnoreCase("mysql")) {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				String url = "jdbc:mysql://" + Configuration.Host + ":" + Configuration.Port + "/"
-						+ Configuration.DBname;
+						+ Configuration.dbName;
 
 				connection = DriverManager.getConnection(url, Configuration.Username, Configuration.Password);
 				executeSync("CREATE TABLE IF NOT EXISTS `" + Configuration.TableName
@@ -208,7 +208,7 @@ public class MySQL {
 		return Statements.SELECT;
 	}
 
-	public static void SQLUpdate(Integer x, Integer y, Integer z, Integer id, Integer world) {
+	public static void sqlUpdate(Integer x, Integer y, Integer z, Integer id, Integer world) {
 		if (!hasConnected()) {
 			try {
 				MySQL.connect();
@@ -222,15 +222,15 @@ public class MySQL {
 				+ y + "' AND `z`='" + z + "' AND `world`='" + world + "'");
 
 		try {
-			boolean SQLexist = false;
+			boolean sqlExist = false;
 			int Gid = 0;
 
 			while (resultSet.next()) {
-				SQLexist = true;
+				sqlExist = true;
 				Gid = resultSet.getInt("material");
 			}
 
-			if (SQLexist) {
+			if (sqlExist) {
 				if (id != null && Gid != id)
 					query("UPDATE `" + Configuration.TableName + "` SET `material`='" + id + "' WHERE `x`='" + x
 							+ "' AND `y`='" + y + "' AND `z`='" + z + "' AND `world`='" + world + "'");
@@ -245,7 +245,7 @@ public class MySQL {
 		}
 	}
 
-	public static int getID(Integer x, Integer y, Integer z, String world) {
+	public static int getId(Integer x, Integer y, Integer z, String world) {
 		if (!hasConnected()) {
 			try {
 				MySQL.connect();

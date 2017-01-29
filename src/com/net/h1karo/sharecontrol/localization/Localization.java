@@ -574,7 +574,7 @@ public class Localization {
 		MessageManager.getManager().msg(p, MessageType.PLINFO, msg);
 	}
 
-	public static void ThisNotMaterialandID(CommandSender sender, String material) {
+	public static void thisNotMaterialAndId(CommandSender sender, String material) {
 		String msg = ChatColor.translateAlternateColorCodes('&',
 				LanguageFiles.ThisNotMaterialandId.replace("%material%", material));
 		MessageManager.getManager().msg(sender, MessageType.PLINFO, msg);

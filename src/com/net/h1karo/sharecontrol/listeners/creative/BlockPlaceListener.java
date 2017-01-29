@@ -48,7 +48,7 @@ public class BlockPlaceListener implements Listener {
 			return;
 		Database.cactusClear(b);
 		if (!Permissions.perms(p, "allow.notlogging"))
-			Database.AddBlock(b);
+			Database.addBlock(b);
 		else
 			Database.removeBlock(b);
 	}
@@ -56,15 +56,15 @@ public class BlockPlaceListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
 	public void disableBlockPlace(BlockPlaceEvent e) {
-		if (e.isCancelled() || Configuration.BlockingBlocksPlaceList.contains("none") || e.getBlock() == null)
+		if (e.isCancelled() || Configuration.blockingBlocksPlaceList.contains("none") || e.getBlock() == null)
 			return;
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
 		if (Permissions.perms(p, "allow.blocking-placement.*") || p.getGameMode() != GameMode.CREATIVE)
 			return;
-		if ((Configuration.BlockingBlocksPlaceList.contains(b.getTypeId())
+		if ((Configuration.blockingBlocksPlaceList.contains(b.getTypeId())
 				&& !Permissions.perms(p, "allow.blocking-placement." + b.getTypeId()))
-				|| (Configuration.BlockingBlocksPlaceList.contains(b.getType().toString())
+				|| (Configuration.blockingBlocksPlaceList.contains(b.getType().toString())
 						&& !Permissions.perms(p, "allow.blocking-placement." + b.getType().toString()))) {
 			Localization.PlaceBlock(b.getType(), p);
 			e.setCancelled(true);

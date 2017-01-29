@@ -37,7 +37,7 @@ public class LanguageFiles {
 	private static FileConfiguration languageConfig = null;
 	private static File languageConfigFile = null;
 
-	public static void reloadlanguageConfig(String lang) {
+	public static void reloadLanguageConfig(String lang) {
 		if (languageConfigFile == null)
 			languageConfigFile = new File(main.getDataFolder(), "languages" + File.separator + lang + ".yml");
 
@@ -53,11 +53,11 @@ public class LanguageFiles {
 
 	public static FileConfiguration getLangConfig(String lang) {
 		if (languageConfig == null)
-			reloadlanguageConfig(lang);
+			reloadLanguageConfig(lang);
 		return languageConfig;
 	}
 
-	public static void savelanguageConfig(String lang) {
+	public static void saveLanguageConfig(String lang) {
 		if (languageConfig == null || languageConfigFile == null)
 			return;
 

@@ -53,18 +53,18 @@ public class Database {
 
 	public static void saveDatabase() {
 		saveStatus = true;
-		SQLSave();
+		sqlSave();
 		cache.clear();
 		cache.putAll(extracache);
 		extracache.clear();
 		saveStatus = false;
 	}
 
-	public static void SyncSaveDatabase() {
+	public static void syncSaveDatabase() {
 		saveDatabase();
 	}
 
-	public static void AsyncSaveDatabase() {
+	public static void asyncSaveDatabase() {
 		AsyncSave = Bukkit.getServer().getScheduler().runTaskAsynchronously(main, new Runnable() {
 			@Override
 			public void run() {
@@ -74,7 +74,7 @@ public class Database {
 		});
 	}
 
-	public static void AsyncSaveInvSave() {
+	public static void asyncSaveInv() {
 		AsyncSaveInv = Bukkit.getServer().getScheduler().runTaskAsynchronously(main, new Runnable() {
 			@Override
 			public void run() {
@@ -89,9 +89,9 @@ public class Database {
 			public void run() {
 				if (cache.size() > 0 || PlayerGameModeChangeListener.cache.size() > 0) {
 					if (cache.size() > 0)
-						AsyncSaveDatabase();
+						asyncSaveDatabase();
 					if (PlayerGameModeChangeListener.cache.size() > 0)
-						AsyncSaveInvSave();
+						asyncSaveInv();
 					main.log("Database have been background saved!");
 				}
 			}
@@ -100,7 +100,7 @@ public class Database {
 
 	/** GENERAL FUNCTION OF HANDLER **/
 
-	public static void AddBlockMoreArguments(Block b, int id) {
+	public static void addBlockMoreArguments(Block b, int id) {
 		int x = b.getX(), y = b.getY(), z = b.getZ(), w = Bukkit.getWorlds().indexOf(b.getWorld());
 		List<Integer> key = new ArrayList<Integer>();
 		key.add(x);
@@ -116,7 +116,7 @@ public class Database {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void AddBlock(Block b) {
+	public static void addBlock(Block b) {
 		int x = b.getX(), y = b.getY(), z = b.getZ(), w = Bukkit.getWorlds().indexOf(b.getWorld()), id = b.getTypeId();
 		List<Integer> key = new ArrayList<Integer>();
 		key.add(x);
@@ -134,7 +134,7 @@ public class Database {
 	public static void AddLocation(Location l) {
 		World w = l.getWorld();
 		Block b = w.getBlockAt(l);
-		AddBlock(b);
+		addBlock(b);
 	}
 
 	public static void removeBlock(Block b) {
@@ -171,7 +171,7 @@ public class Database {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static int CheckCreativeRough(Block b) {
+	public static int checkCreativeRough(Block b) {
 		int x = b.getX(), y = b.getY(), z = b.getZ(), id = b.getTypeId(), w = Bukkit.getWorlds().indexOf(b.getWorld());
 		List<Integer> key = new ArrayList<Integer>();
 		key.add(x);
@@ -187,7 +187,7 @@ public class Database {
 		return 0;
 	}
 
-	public static boolean ListCheckCreative(List<Block> Blocks) {
+	public static boolean listCheckCreative(List<Block> Blocks) {
 		for (Block b : Blocks) {
 			if (isCreative(b))
 				return true;
@@ -197,11 +197,11 @@ public class Database {
 
 	/** EXTRA **/
 
-	public static void UpdateBlockToLocation(Block b, Location l) {
+	public static void updateBlockToLocation(Block b, Location l) {
 		if (!isCreative(b))
 			return;
 		World w = l.getWorld();
-		AddBlock(w.getBlockAt(l));
+		addBlock(w.getBlockAt(l));
 	}
 
 	public static void fullClear(Block b) {
@@ -403,7 +403,7 @@ public class Database {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void SQLSave() {
+	public static void sqlSave() {
 		Integer id;
 		Set<List<Integer>> keys = cache.keySet();
 		for (int i = 0; i < keys.size(); i++) {
@@ -415,8 +415,8 @@ public class Database {
 			else
 				id = cache.get(key);
 
-			MySQL.SQLUpdate(x, y, z, id, w);
-			MySQL.SQLUpdate(x, y, z, id, w);
+			MySQL.sqlUpdate(x, y, z, id, w);
+			MySQL.sqlUpdate(x, y, z, id, w);
 		}
 		id = null;
 	}

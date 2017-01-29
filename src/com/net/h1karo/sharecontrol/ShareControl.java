@@ -164,7 +164,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &7Stopping tasks..."));
 		Bukkit.getScheduler().cancelTasks(this);
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &7Saving inventories and block database..."));
-		Database.SyncSaveDatabase();
+		Database.syncSaveDatabase();
 		PlayerGameModeChangeListener.saveMultiInv();
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &7Disconnecting from SQLite..."));
 		MySQL.disconnect();

@@ -53,12 +53,12 @@ public class Configuration {
 		main.getConfig().set("General.Version", main.version);
 		main.getConfig().set("General.Language", Language);
 
-		main.getConfig().set("General.Database", Database);
+		main.getConfig().set("General.Database", database);
 		main.getConfig().set("General.SaveInterval", DBInterval);
 		main.getConfig().set("General.MySQL.TableName", TableName);
 		main.getConfig().set("General.MySQL.Host", Host);
 		main.getConfig().set("General.MySQL.Port", Port);
-		main.getConfig().set("General.MySQL.Database", DBname);
+		main.getConfig().set("General.MySQL.Database", dbName);
 		main.getConfig().set("General.MySQL.Username", Username);
 		main.getConfig().set("General.MySQL.Password", Password);
 
@@ -76,9 +76,9 @@ public class Configuration {
 		main.getConfig().set("Settings.MultiInventories.Enabled", MultiInventoriesEnabled);
 		main.getConfig().set("Settings.MultiInventories.Separation", InventorySeparation);
 
-		main.getConfig().set("Settings.Blocks.BlockingPlacement", BlockingBlocksPlaceList);
-		main.getConfig().set("Settings.Blocks.BlockingBreakage", BlockingBlocksBreakList);
-		main.getConfig().set("Settings.Blocks.BlockingInteract", BlockingInteractList);
+		main.getConfig().set("Settings.Blocks.BlockingPlacement", blockingBlocksPlaceList);
+		main.getConfig().set("Settings.Blocks.BlockingBreakage", blockingBlocksBreakList);
+		main.getConfig().set("Settings.Blocks.BlockingInteract", blockingInteractList);
 
 		main.getConfig().set("Settings.Items.BlockingInventory", blockingItemsInvList);
 
@@ -112,12 +112,12 @@ public class Configuration {
 		versionCheck = main.getConfig().getBoolean("General.CheckUpdates", true);
 		Language = main.getConfig().getString("General.Language", "en");
 
-		Database = main.getConfig().getString("General.Database", "sqlite");
+		database = main.getConfig().getString("General.Database", "sqlite");
 		DBInterval = main.getConfig().getInt("General.SaveInterval", 5);
 		TableName = main.getConfig().getString("General.MySQL.TableName", "blocks");
 		Host = main.getConfig().getString("General.MySQL.Host", "localhost");
 		Port = main.getConfig().getString("General.MySQL.Port", "3306");
-		DBname = main.getConfig().getString("General.MySQL.Database", "minecraft");
+		dbName = main.getConfig().getString("General.MySQL.Database", "minecraft");
 		Username = main.getConfig().getString("General.MySQL.Username", "minecraft");
 		Password = main.getConfig().getString("General.MySQL.Password", "");
 
@@ -137,15 +137,15 @@ public class Configuration {
 		MultiInventoriesEnabled = main.getConfig().getBoolean("Settings.MultiInventories.Enabled", true);
 		InventorySeparation = main.getConfig().getBoolean("Settings.MultiInventories.Separation", true);
 
-		BlockingBlocksPlaceList = main.getConfig().getStringList("Settings.Blocks.BlockingPlacement");
-		if (BlockingBlocksPlaceList.isEmpty())
-			BlockingBlocksPlaceList.addAll(defBlockingBlocksPlaceList);
-		BlockingBlocksBreakList = main.getConfig().getStringList("Settings.Blocks.BlockingBreakage");
-		if (BlockingBlocksBreakList.isEmpty())
-			BlockingBlocksBreakList.addAll(defBlockingBlocksBreakList);
-		BlockingInteractList = main.getConfig().getStringList("Settings.Blocks.BlockingInteract");
-		if (BlockingInteractList.isEmpty())
-			BlockingInteractList.addAll(defBlockingInteractList);
+		blockingBlocksPlaceList = main.getConfig().getStringList("Settings.Blocks.BlockingPlacement");
+		if (blockingBlocksPlaceList.isEmpty())
+			blockingBlocksPlaceList.addAll(defBlockingBlocksPlaceList);
+		blockingBlocksBreakList = main.getConfig().getStringList("Settings.Blocks.BlockingBreakage");
+		if (blockingBlocksBreakList.isEmpty())
+			blockingBlocksBreakList.addAll(defBlockingBlocksBreakList);
+		blockingInteractList = main.getConfig().getStringList("Settings.Blocks.BlockingInteract");
+		if (blockingInteractList.isEmpty())
+			blockingInteractList.addAll(defBlockingInteractList);
 
 		blockingItemsInvList = main.getConfig().getStringList("Settings.Items.BlockingInventory");
 		if (blockingItemsInvList.isEmpty())
@@ -173,33 +173,33 @@ public class Configuration {
 		languageConfigFile = new File(main.getDataFolder(), "languages" + File.separator + "en.yml");
 		if (!languageConfigFile.exists()) {
 			main.getLogger().info("English language file not found! Loading...");
-			LanguageFiles.reloadlanguageConfig("en");
-			LanguageFiles.savelanguageConfig("en");
+			LanguageFiles.reloadLanguageConfig("en");
+			LanguageFiles.saveLanguageConfig("en");
 		}
 
 		languageConfigFile = new File(main.getDataFolder(), "languages" + File.separator + "ru.yml");
 		if (!languageConfigFile.exists()) {
 			main.getLogger().info("Russian language file not found! Loading...");
-			LanguageFiles.reloadlanguageConfig("ru");
-			LanguageFiles.savelanguageConfig("ru");
+			LanguageFiles.reloadLanguageConfig("ru");
+			LanguageFiles.saveLanguageConfig("ru");
 		}
 
 		languageConfigFile = new File(main.getDataFolder(), "languages" + File.separator + "de.yml");
 		if (!languageConfigFile.exists()) {
 			main.getLogger().info("German language file not found! Loading...");
-			LanguageFiles.reloadlanguageConfig("de");
-			LanguageFiles.savelanguageConfig("de");
+			LanguageFiles.reloadLanguageConfig("de");
+			LanguageFiles.saveLanguageConfig("de");
 		}
 
 		languageConfigFile = new File(main.getDataFolder(), "languages" + File.separator + "cn.yml");
 		if (!languageConfigFile.exists()) {
 			main.getLogger().info("Simplified Chinese language file not found! Loading...");
-			LanguageFiles.reloadlanguageConfig("cn");
-			LanguageFiles.savelanguageConfig("cn");
+			LanguageFiles.reloadLanguageConfig("cn");
+			LanguageFiles.saveLanguageConfig("cn");
 		}
 
-		LanguageFiles.reloadlanguageConfig(Language);
-		LanguageFiles.savelanguageConfig(Language);
+		LanguageFiles.reloadLanguageConfig(Language);
+		LanguageFiles.saveLanguageConfig(Language);
 		languageConfigFile = null;
 
 		main.getCommand("sharecontrol").setPermissionMessage(
@@ -227,16 +227,16 @@ public class Configuration {
 		} else
 			Material = org.bukkit.Material.getMaterial(material);
 		if (!(Material instanceof Material)) {
-			Localization.ThisNotMaterialandID(sender, material);
+			Localization.thisNotMaterialAndId(sender, material);
 		} else {
 			if (list.compareToIgnoreCase("break") == 0) {
-				BlockingBlocksBreakList.add(material);
+				blockingBlocksBreakList.add(material);
 				saveCfg();
 				Localization.AddSuccess(sender, list, material);
 				return;
 			}
 			if (list.compareToIgnoreCase("place") == 0) {
-				BlockingBlocksPlaceList.add(material);
+				blockingBlocksPlaceList.add(material);
 				saveCfg();
 				Localization.AddSuccess(sender, list, material);
 				return;
@@ -248,7 +248,7 @@ public class Configuration {
 				return;
 			}
 			if (list.compareToIgnoreCase("interact") == 0) {
-				BlockingInteractList.add(material);
+				blockingInteractList.add(material);
 				saveCfg();
 				Localization.AddSuccess(sender, list, material);
 				return;
@@ -270,16 +270,16 @@ public class Configuration {
 		} else
 			Material = org.bukkit.Material.getMaterial(material);
 		if (!(Material instanceof Material)) {
-			Localization.ThisNotMaterialandID(sender, material);
+			Localization.thisNotMaterialAndId(sender, material);
 		} else {
 			if (list.compareToIgnoreCase("break") == 0) {
-				BlockingBlocksBreakList.remove(material);
+				blockingBlocksBreakList.remove(material);
 				saveCfg();
 				Localization.RemoveSuccess(sender, list, material);
 				return;
 			}
 			if (list.compareToIgnoreCase("place") == 0) {
-				BlockingBlocksPlaceList.remove(material);
+				blockingBlocksPlaceList.remove(material);
 				saveCfg();
 				Localization.RemoveSuccess(sender, list, material);
 				return;
@@ -291,7 +291,7 @@ public class Configuration {
 				return;
 			}
 			if (list.compareToIgnoreCase("interact") == 0) {
-				BlockingInteractList.remove(material);
+				blockingInteractList.remove(material);
 				saveCfg();
 				Localization.RemoveSuccess(sender, list, material);
 				return;
@@ -305,9 +305,9 @@ public class Configuration {
 
 	@SuppressWarnings("deprecation")
 	protected static void CheckError() {
-		int j = BlockingBlocksPlaceList.toArray().length;
+		int j = blockingBlocksPlaceList.toArray().length;
 		for (int i = 0; i < j; i++) {
-			String String = BlockingBlocksPlaceList.toArray()[i].toString().replace("'", "");
+			String String = blockingBlocksPlaceList.toArray()[i].toString().replace("'", "");
 			Material Material;
 
 			if (isInteger(String)) {
@@ -320,9 +320,9 @@ public class Configuration {
 				errorcode = String;
 			}
 		}
-		j = BlockingBlocksBreakList.toArray().length;
+		j = blockingBlocksBreakList.toArray().length;
 		for (int i = 0; i < j; i++) {
-			String String = BlockingBlocksBreakList.toArray()[i].toString().replace("'", "");
+			String String = blockingBlocksBreakList.toArray()[i].toString().replace("'", "");
 			Material Material;
 
 			if (isInteger(String)) {
@@ -351,9 +351,9 @@ public class Configuration {
 				errorcode = String;
 			}
 		}
-		j = BlockingInteractList.toArray().length;
+		j = blockingInteractList.toArray().length;
 		for (int i = 0; i < j; i++) {
-			String String = BlockingInteractList.toArray()[i].toString().replace("'", "");
+			String String = blockingInteractList.toArray()[i].toString().replace("'", "");
 			Material Material;
 
 			if (isInteger(String)) {
@@ -447,8 +447,8 @@ public class Configuration {
 	}
 
 	public static boolean versionCheck;
-	public static List<String> BlockingBlocksPlaceList, BlockingBlocksBreakList, blockingItemsInvList, blockingCmdsList,
-			BlockingInteractList;
+	public static List<String> blockingBlocksPlaceList, blockingBlocksBreakList, blockingItemsInvList, blockingCmdsList,
+			blockingInteractList;
 	public static boolean CreatureInteract, PlayerInteract, CreativeNotify, SurvivalNotify, material, BlockingBreak,
 			PrefixEnabled, clearDropInInventory, EssentialsSignBlock;
 	public static boolean MultiInventoriesEnabled, InventorySeparation;
@@ -464,7 +464,7 @@ public class Configuration {
 	private static File languageFolder;
 	public static File dataFolder;
 
-	public static String Database, Host, Port, DBname, Username, Password, TableName;
+	public static String database, Host, Port, dbName, Username, Password, TableName;
 	public static int DBInterval;
 
 	public static List<String> defBlockingBlocksPlaceList, defBlockingBlocksBreakList, defBlockingItemsInvList,

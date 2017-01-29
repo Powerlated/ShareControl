@@ -98,15 +98,15 @@ public class PlayerInteractListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
 	public void blockingInteractWithBlock(PlayerInteractEvent e) {
-		if (e.isCancelled() || Configuration.BlockingInteractList.contains("none") || e.getClickedBlock() == null)
+		if (e.isCancelled() || Configuration.blockingInteractList.contains("none") || e.getClickedBlock() == null)
 			return;
 		Player p = e.getPlayer();
 		Block b = e.getClickedBlock();
 		if (Permissions.perms(p, "allow.blocking-interact.*") || p.getGameMode() != GameMode.CREATIVE)
 			return;
-		if ((Configuration.BlockingInteractList.contains(b.getTypeId())
+		if ((Configuration.blockingInteractList.contains(b.getTypeId())
 				&& !Permissions.perms(p, "allow.blocking-interact." + b.getTypeId()))
-				|| (Configuration.BlockingInteractList.contains(b.getType().toString())
+				|| (Configuration.blockingInteractList.contains(b.getType().toString())
 						&& !Permissions.perms(p, "allow.blocking-interact." + b.getType().toString()))) {
 			Localization.interact(p);
 			e.setCancelled(true);
