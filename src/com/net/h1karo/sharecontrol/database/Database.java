@@ -18,7 +18,9 @@
 package com.net.h1karo.sharecontrol.database;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -27,12 +29,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.net.h1karo.sharecontrol.ShareControl;
 import com.net.h1karo.sharecontrol.configuration.Configuration;
 import com.net.h1karo.sharecontrol.listeners.multiinventories.PlayerGameModeChangeListener;
 import com.net.h1karo.sharecontrol.version.CoreVersion;
+
+import net.royawesome.jlibnoise.MathHelper;
 
 public class Database {
 
@@ -131,7 +136,7 @@ public class Database {
 		fullcache.put(key, id);
 	}
 
-	public static void AddLocation(Location l) {
+	public static void addLocation(Location l) {
 		World w = l.getWorld();
 		Block b = w.getBlockAt(l);
 		addBlock(b);
@@ -211,8 +216,78 @@ public class Database {
 		removeBlock(b);
 	}
 
+	public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
+		List<Entity> entities = new ArrayList<Entity>();
+		World world = location.getWorld();
+
+		// To find chunks we use chunk coordinates (not block coordinates!)
+		int smallX = MathHelper.floor((location.getX() - radius) / 16.0D);
+		int bigX = MathHelper.floor((location.getX() + radius) / 16.0D);
+		int smallZ = MathHelper.floor((location.getZ() - radius) / 16.0D);
+		int bigZ = MathHelper.floor((location.getZ() + radius) / 16.0D);
+
+		for (int x = smallX; x <= bigX; x++) {
+			for (int z = smallZ; z <= bigZ; z++) {
+				if (world.isChunkLoaded(x, z)) {
+					entities.addAll(Arrays.asList(world.getChunkAt(x, z).getEntities())); // Add
+																							// all
+																							// entities
+																							// from
+																							// this
+																							// chunk
+																							// to
+																							// the
+																							// list
+				}
+			}
+		}
+
+		// Remove the entities that are within the box above but not actually in
+		// the sphere we defined with the radius and location
+		// This code below could probably be replaced in Java 8 with a stream ->
+		// filter
+		Iterator<Entity> entityIterator = entities.iterator(); // Create an
+																// iterator so
+																// we can loop
+																// through the
+																// list while
+																// removing
+																// entries
+		while (entityIterator.hasNext()) {
+			if (entityIterator.next().getLocation().distanceSquared(location) > radius * radius) { // If
+																									// the
+																									// entity
+																									// is
+																									// outside
+																									// of
+																									// the
+																									// sphere...
+				entityIterator.remove(); // Remove it
+			}
+		}
+		return entities;
+	}
+
 	@SuppressWarnings("deprecation")
 	public static void dropBlocks(Block b) {
+		// Get entities around the block and if it is an item, remove the item.
+		// new BukkitRunnable() {
+		//
+		// @Override
+		// public void run() {
+		// // What you want to schedule goes here
+		// Bukkit.broadcastMessage(b.getLocation().add(new
+		// Location(b.getWorld(), 0.5, 0.5, 0.5)).toString());
+		// for (Entity e : getEntitiesAroundPoint(b.getLocation(), 1)) {
+		// if (e.getType() == EntityType.DROPPED_ITEM) {
+		// Item i = (Item) e;
+		// i.remove();
+		// }
+		// }
+		// }
+		//
+		// }.runTaskLater(main, 1);
+
 		int h = b.getLocation().getBlockY();
 		World w = b.getWorld();
 		for (int j = b.getLocation().getBlockY() + 1; j <= Bukkit.getWorlds().get(0).getMaxHeight(); j++) {
@@ -224,64 +299,64 @@ public class Database {
 		}
 
 		for (int j = h; j > b.getLocation().getBlockY(); j--) {
-			Block NewB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
-			if (ifUpDrop(NewB))
-				fullClear(NewB);
+			Block newB = w.getBlockAt(b.getLocation().getBlockX(), j, b.getLocation().getBlockZ());
+			if (ifUpDrop(newB))
+				fullClear(newB);
 		}
 
-		Block NewB = w.getBlockAt(b.getX(), b.getY() + 1, b.getZ());
-		if (ifOneUpDrop(NewB)) {
-			if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 12)
-				fullClear(NewB);
-			if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 5)
-				fullClear(NewB);
-			if (ifLaterallyDrop(NewB) == 4
-					&& (NewB.getData() == 6 || NewB.getData() == 14 || NewB.getData() == 5 || NewB.getData() == 13))
-				fullClear(NewB);
-			if (ifLaterallyDrop(NewB) == 5 && (NewB.getData() == 5 || NewB.getData() == 13))
-				fullClear(NewB);
+		Block newB = w.getBlockAt(b.getX(), b.getY() + 1, b.getZ());
+		if (ifOneUpDrop(newB)) {
+			if (ifLaterallyDrop(newB) == 1 && newB.getData() == 12)
+				fullClear(newB);
+			if (ifLaterallyDrop(newB) == 2 && newB.getData() == 5)
+				fullClear(newB);
+			if (ifLaterallyDrop(newB) == 4
+					&& (newB.getData() == 6 || newB.getData() == 14 || newB.getData() == 5 || newB.getData() == 13))
+				fullClear(newB);
+			if (ifLaterallyDrop(newB) == 5 && (newB.getData() == 5 || newB.getData() == 13))
+				fullClear(newB);
 		}
 
-		NewB = w.getBlockAt(b.getX() + 1, b.getY(), b.getZ());
-		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 5)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 1)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 3)
-			fullClear(NewB);
-		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 1 || NewB.getData() == 9))
-			fullClear(NewB);
+		newB = w.getBlockAt(b.getX() + 1, b.getY(), b.getZ());
+		if (ifLaterallyDrop(newB) == 1 && newB.getData() == 5)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 2 && newB.getData() == 1)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 3 && newB.getData() == 3)
+			fullClear(newB);
+		if ((ifLaterallyDrop(newB) == 4 || ifLaterallyDrop(newB) == 5) && (newB.getData() == 1 || newB.getData() == 9))
+			fullClear(newB);
 
-		NewB = w.getBlockAt(b.getX() - 1, b.getY(), b.getZ());
-		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 4)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 2)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 1)
-			fullClear(NewB);
-		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 2 || NewB.getData() == 10))
-			fullClear(NewB);
+		newB = w.getBlockAt(b.getX() - 1, b.getY(), b.getZ());
+		if (ifLaterallyDrop(newB) == 1 && newB.getData() == 4)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 2 && newB.getData() == 2)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 3 && newB.getData() == 1)
+			fullClear(newB);
+		if ((ifLaterallyDrop(newB) == 4 || ifLaterallyDrop(newB) == 5) && (newB.getData() == 2 || newB.getData() == 10))
+			fullClear(newB);
 
-		NewB = w.getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
-		if ((ifLaterallyDrop(NewB) == 1 || ifLaterallyDrop(NewB) == 2) && NewB.getData() == 3)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 0)
-			fullClear(NewB);
-		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 3 || NewB.getData() == 11))
-			fullClear(NewB);
+		newB = w.getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
+		if ((ifLaterallyDrop(newB) == 1 || ifLaterallyDrop(newB) == 2) && newB.getData() == 3)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 3 && newB.getData() == 0)
+			fullClear(newB);
+		if ((ifLaterallyDrop(newB) == 4 || ifLaterallyDrop(newB) == 5) && (newB.getData() == 3 || newB.getData() == 11))
+			fullClear(newB);
 
-		NewB = w.getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
-		if (ifLaterallyDrop(NewB) == 1 && NewB.getData() == 2)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 2 && NewB.getData() == 4)
-			fullClear(NewB);
-		if (ifLaterallyDrop(NewB) == 3 && NewB.getData() == 2)
-			fullClear(NewB);
-		if ((ifLaterallyDrop(NewB) == 4 || ifLaterallyDrop(NewB) == 5) && (NewB.getData() == 4 || NewB.getData() == 12))
-			fullClear(NewB);
+		newB = w.getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
+		if (ifLaterallyDrop(newB) == 1 && newB.getData() == 2)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 2 && newB.getData() == 4)
+			fullClear(newB);
+		if (ifLaterallyDrop(newB) == 3 && newB.getData() == 2)
+			fullClear(newB);
+		if ((ifLaterallyDrop(newB) == 4 || ifLaterallyDrop(newB) == 5) && (newB.getData() == 4 || newB.getData() == 12))
+			fullClear(newB);
 	}
 
-	public static boolean CheckBlock(Block b) {
+	public static boolean checkBlock(Block b) {
 		if (ifWaterDrop(b) && isCreative(b)) {
 			fullClear(b);
 			return true;

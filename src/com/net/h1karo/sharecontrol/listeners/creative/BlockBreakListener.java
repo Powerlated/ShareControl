@@ -42,12 +42,23 @@ public class BlockBreakListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void creativeBlockBreak(BlockBreakEvent e) {
+
 		Player p = e.getPlayer();
 		if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled())
 			return;
 		Block b = e.getBlock();
 		Database.removeBlock(b);
 	}
+
+	// @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	// public void creativePhysicsEvent(BlockPhysicsEvent e) {
+	// Bukkit.broadcastMessage("CREATIVE BLOCK PHYSICS BROKEN");
+	// Player p = e
+	// if (p.getGameMode() != GameMode.CREATIVE || e.isCancelled())
+	// return;
+	// Block b = e.getBlock();
+	// Database.removeBlock(b);
+	// }
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
@@ -62,7 +73,7 @@ public class BlockBreakListener implements Listener {
 				&& !Permissions.perms(p, "allow.blocking-breakage." + b.getTypeId()))
 				|| (Configuration.blockingBlocksBreakList.contains(b.getType().toString())
 						&& !Permissions.perms(p, "allow.blocking-breakage." + b.getType().toString()))) {
-			Localization.BreakBlock(b.getType(), p);
+			Localization.breakBlock(b.getType(), p);
 			e.setCancelled(true);
 		}
 	}

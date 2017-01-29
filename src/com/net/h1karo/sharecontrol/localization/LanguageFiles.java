@@ -170,7 +170,7 @@ public class LanguageFiles {
 		getLangConfig(lang).set("Selections.PleaseWait", PleaseWait);
 		getLangConfig(lang).set("Selections.BlocksChanged", BlocksChanged);
 
-		getLangConfig(lang).set("Version", CurrentVersion);
+		getLangConfig(lang).set("Version", currentVersion);
 		getLangConfig(lang).set("DevelopmentTeam", DevelopmentTeam);
 		getLangConfig(lang).set("Site", WebSite);
 		getLangConfig(lang).set("Author", Author);
@@ -335,7 +335,7 @@ public class LanguageFiles {
 		BlocksChanged = getLangConfig(lang).getString("Selections.BlocksChanged",
 				"&7Been successfully updated &9%number% blocks&7!");
 
-		CurrentVersion = getLangConfig(lang).getString("Version",
+		currentVersion = getLangConfig(lang).getString("Version",
 				"&7The current version of the plugin: &9%version%&7!");
 		DevelopmentTeam = getLangConfig(lang).getString("DevelopmentTeam", "&7Development team: &9%development-team%");
 		WebSite = getLangConfig(lang).getString("Site", "&7Site: &9%link%");
@@ -517,7 +517,7 @@ public class LanguageFiles {
 		BlocksChanged = getLangConfig(lang).getString("Selections.BlocksChanged",
 				"&7Ð‘Ð»Ð¾ÐºÐ¾Ð² Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¾: &9%number%&7!");
 
-		CurrentVersion = getLangConfig(lang).getString("Version",
+		currentVersion = getLangConfig(lang).getString("Version",
 				"&7Ð¢ÐµÐºÑƒÑ‰Ð°Ñ� Ð²ÐµÑ€Ñ�Ð¸Ñ� Ð¿Ð»Ð°Ð³Ð¸Ð½Ð°: &9%version%&7!");
 		DevelopmentTeam = getLangConfig(lang).getString("DevelopmentTeam",
 				"&7ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¾Ð²: &9%development-team%");
@@ -676,7 +676,7 @@ public class LanguageFiles {
 		BlocksChanged = getLangConfig(lang).getString("Selections.BlocksChanged",
 				"&7Erfolgreich &9%number% BlÃ¶cke &7geÃ¤ndert!");
 
-		CurrentVersion = getLangConfig(lang).getString("Version", "&7Derzeitige Version des Plugins: &9%version%&7!");
+		currentVersion = getLangConfig(lang).getString("Version", "&7Derzeitige Version des Plugins: &9%version%&7!");
 		DevelopmentTeam = getLangConfig(lang).getString("DevelopmentTeam", "&7Development team: &9%development-team%");
 		WebSite = getLangConfig(lang).getString("Site", "&7Seite: &9%link%");
 		Author = getLangConfig(lang).getString("Author", "&9%nickname% &7[&cAutor&7]");
@@ -821,7 +821,7 @@ public class LanguageFiles {
 		BlocksChanged = getLangConfig(lang).getString("Selections.BlocksChanged",
 				"&7å·²æˆ�åŠŸæ›´æ–° &9%number% æ–¹å�—&7!");
 
-		CurrentVersion = getLangConfig(lang).getString("Version", "&7å½“å‰�ç‰ˆæœ¬: &9%version%&7!");
+		currentVersion = getLangConfig(lang).getString("Version", "&7å½“å‰�ç‰ˆæœ¬: &9%version%&7!");
 		DevelopmentTeam = getLangConfig(lang).getString("DevelopmentTeam", "&7å¼€å�‘å›¢é˜Ÿ: &9%development-team%");
 		WebSite = getLangConfig(lang).getString("Site", "&7ç½‘å�€: &9%link%");
 		Author = getLangConfig(lang).getString("Author", "&9%nickname% &7[&cAutor&7]");
@@ -869,7 +869,7 @@ public class LanguageFiles {
 	public static String BlockHas;
 	public static String BlockNow;
 
-	public static String CurrentVersion;
+	public static String currentVersion;
 	public static String DevelopmentTeam;
 	public static String WebSite;
 	public static String Author;

@@ -108,7 +108,7 @@ public class BlockMoveByPistonListener implements Listener {
 				Database.fullClear(b);
 				continue;
 			}
-			if (Database.CheckBlock(b) || Database.checkCreativeRough(b) == 0)
+			if (Database.checkBlock(b) || Database.checkCreativeRough(b) == 0)
 				continue;
 
 			Block newCreativeBlock = null;
@@ -146,7 +146,7 @@ public class BlockMoveByPistonListener implements Listener {
 			Database.fullClear(b);
 			return;
 		}
-		if (Database.CheckBlock(b) || Database.checkCreativeRough(b) == 0)
+		if (Database.checkBlock(b) || Database.checkCreativeRough(b) == 0)
 			return;
 		Block newCreativeBlock = null;
 

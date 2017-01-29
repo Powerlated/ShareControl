@@ -155,7 +155,7 @@ public class Localization {
 		MessageManager.getManager().msg(p, MessageType.PLAYERS, msg);
 	}
 
-	public static void BreakBlock(Material typeThisBlock, Player p) {
+	public static void breakBlock(Material typeThisBlock, Player p) {
 		if (!Configuration.creativeNotify)
 			return;
 		String strThisBlock = typeThisBlock.toString().toLowerCase().replace("_", " ");

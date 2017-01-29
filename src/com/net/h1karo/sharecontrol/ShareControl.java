@@ -87,7 +87,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 	public void onEnable() {
 		console = Bukkit.getConsoleSender();
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&',
-				"&7&l=================== &9&lShare&f&lControl &7&l==================="));
+				"&7&l=================== &f&lPowerlated's Fork of &9&lShare&f&lControl &7&l==================="));
 		if (!CoreVersion.getVersion().equals(CoreVersion.OneDotSeven)
 				&& !CoreVersion.getVersion().equals(CoreVersion.OneDotEight)
 				&& !CoreVersion.getVersion().equals(CoreVersion.OneDotNine)
@@ -124,7 +124,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 			MetricsLite metrics = new MetricsLite(this);
 			metrics.start();
 		} catch (IOException e) {
-			getLogger().warning("Failed to submit the stats!");
+			getLogger().warning("Failed to submit statistics.");
 		}
 
 		Permissions.registerCustomPermissions();
@@ -143,7 +143,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 				console.sendMessage(ChatColor.translateAlternateColorCodes('&', " &f" + Localization.link));
 			}
 			if (result == UpdateResult.NO_UPDATE)
-				console.sendMessage(ChatColor.translateAlternateColorCodes('&', " Updates not found!"));
+				console.sendMessage(ChatColor.translateAlternateColorCodes('&', " No updates found."));
 		}
 
 		if (beta)
@@ -151,7 +151,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 					" &cWARNING!&r You are using a beta version of this plugin!"));
 		if (alpha)
 			console.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					" &cWARNING!&r You are using a version of this plugin!"));
+					" &cWARNING!&r You are using an alpha version of this plugin!"));
 
 		console.sendMessage(ChatColor.translateAlternateColorCodes('&',
 				"&7&l===================================================="));
@@ -186,7 +186,7 @@ public class ShareControl extends JavaPlugin implements Listener {
 
 	protected void pluginInfo(CommandSender sender) {
 		String version = ChatColor.translateAlternateColorCodes('&',
-				LanguageFiles.CurrentVersion.replace("%version%", stringVersion));
+				LanguageFiles.currentVersion.replace("%version%", stringVersion));
 		String Author = "\n  %author%";
 		String team = ChatColor.translateAlternateColorCodes('&',
 				LanguageFiles.DevelopmentTeam.replace("%development-team%",
@@ -210,9 +210,9 @@ public class ShareControl extends JavaPlugin implements Listener {
 	}
 
 	public void updateCheck() {
-		String CBuildString = "", NBuildString = "";
+		String cBuildString = "", nBuildString = "";
 
-		int CMajor = 0, CMinor = 0, CMaintenance = 0, CBuild = 0, NMajor = 0, NMinor = 0, NMaintenance = 0, NBuild = 0;
+		int cMajor = 0, cMinor = 0, cMaintenance = 0, cBuild = 0, nMajor = 0, nMinor = 0, nMaintenance = 0, nBuild = 0;
 
 		try {
 			URL url = new URL("https://api.curseforge.com/servermods/files?projectids=90354");
@@ -239,86 +239,86 @@ public class ShareControl extends JavaPlugin implements Listener {
 			 **/
 			/** \\ **//** \\ **/
 
-			String[] CStrings = currentVersion.split(Pattern.quote("."));
+			String[] cStrings = currentVersion.split(Pattern.quote("."));
 
-			CMajor = Integer.parseInt(CStrings[0]);
-			if (CStrings.length > 1)
-				if (CStrings[1].contains("-")) {
-					CMinor = Integer.parseInt(CStrings[1].split(Pattern.quote("-"))[0]);
-					CBuildString = CStrings[1].split(Pattern.quote("-"))[1];
-					if (CBuildString.contains("b")) {
+			cMajor = Integer.parseInt(cStrings[0]);
+			if (cStrings.length > 1)
+				if (cStrings[1].contains("-")) {
+					cMinor = Integer.parseInt(cStrings[1].split(Pattern.quote("-"))[0]);
+					cBuildString = cStrings[1].split(Pattern.quote("-"))[1];
+					if (cBuildString.contains("b")) {
 						beta = true;
-						CBuildString = CBuildString.replace("b", "");
-						if (CBuildString != "")
-							CBuild = Integer.parseInt(CBuildString) - 1;
-					} else if (CBuildString.contains("a")) {
+						cBuildString = cBuildString.replace("b", "");
+						if (cBuildString != "")
+							cBuild = Integer.parseInt(cBuildString) - 1;
+					} else if (cBuildString.contains("a")) {
 						alpha = true;
-						CBuildString = CBuildString.replace("a", "");
-						if (CBuildString != "")
-							CBuild = Integer.parseInt(CBuildString) - 10;
+						cBuildString = cBuildString.replace("a", "");
+						if (cBuildString != "")
+							cBuild = Integer.parseInt(cBuildString) - 10;
 					} else
-						CBuild = Integer.parseInt(CBuildString);
+						cBuild = Integer.parseInt(cBuildString);
 				} else {
-					CMinor = Integer.parseInt(CStrings[1]);
-					if (CStrings.length > 2)
-						if (CStrings[2].contains("-")) {
-							CMaintenance = Integer.parseInt(CStrings[2].split(Pattern.quote("-"))[0]);
-							CBuildString = CStrings[2].split(Pattern.quote("-"))[1];
-							if (CBuildString.contains("b")) {
+					cMinor = Integer.parseInt(cStrings[1]);
+					if (cStrings.length > 2)
+						if (cStrings[2].contains("-")) {
+							cMaintenance = Integer.parseInt(cStrings[2].split(Pattern.quote("-"))[0]);
+							cBuildString = cStrings[2].split(Pattern.quote("-"))[1];
+							if (cBuildString.contains("b")) {
 								beta = true;
-								CBuildString = CBuildString.replace("b", "");
-								if (CBuildString != "")
-									CBuild = Integer.parseInt(CBuildString) - 1;
-							} else if (CBuildString.contains("a")) {
+								cBuildString = cBuildString.replace("b", "");
+								if (cBuildString != "")
+									cBuild = Integer.parseInt(cBuildString) - 1;
+							} else if (cBuildString.contains("a")) {
 								alpha = true;
-								CBuildString = CBuildString.replace("a", "");
-								if (CBuildString != "")
-									CBuild = Integer.parseInt(CBuildString) - 10;
+								cBuildString = cBuildString.replace("a", "");
+								if (cBuildString != "")
+									cBuild = Integer.parseInt(cBuildString) - 10;
 							} else
-								CBuild = Integer.parseInt(CBuildString);
+								cBuild = Integer.parseInt(cBuildString);
 						} else
-							CMaintenance = Integer.parseInt(CStrings[2]);
+							cMaintenance = Integer.parseInt(cStrings[2]);
 				}
 
-			String[] NStrings = newVersion.split(Pattern.quote("."));
+			String[] nStrings = newVersion.split(Pattern.quote("."));
 
-			NMajor = Integer.parseInt(NStrings[0]);
-			if (NStrings.length > 1)
-				if (NStrings[1].contains("-")) {
-					NMinor = Integer.parseInt(NStrings[1].split(Pattern.quote("-"))[0]);
-					NBuildString = NStrings[1].split(Pattern.quote("-"))[1];
-					if (NBuildString.contains("b")) {
+			nMajor = Integer.parseInt(nStrings[0]);
+			if (nStrings.length > 1)
+				if (nStrings[1].contains("-")) {
+					nMinor = Integer.parseInt(nStrings[1].split(Pattern.quote("-"))[0]);
+					nBuildString = nStrings[1].split(Pattern.quote("-"))[1];
+					if (nBuildString.contains("b")) {
 						beta = true;
-						NBuildString = NBuildString.replace("b", "");
-						if (NBuildString != "")
-							NBuild = Integer.parseInt(NBuildString) - 1;
-					} else if (NBuildString.contains("a")) {
+						nBuildString = nBuildString.replace("b", "");
+						if (nBuildString != "")
+							nBuild = Integer.parseInt(nBuildString) - 1;
+					} else if (nBuildString.contains("a")) {
 						alpha = true;
-						NBuildString = NBuildString.replace("a", "");
-						if (NBuildString != "")
-							NBuild = Integer.parseInt(NBuildString) - 10;
+						nBuildString = nBuildString.replace("a", "");
+						if (nBuildString != "")
+							nBuild = Integer.parseInt(nBuildString) - 10;
 					} else
-						NBuild = Integer.parseInt(NBuildString);
+						nBuild = Integer.parseInt(nBuildString);
 				} else {
-					NMinor = Integer.parseInt(NStrings[1]);
-					if (NStrings.length > 2)
-						if (NStrings[2].contains("-")) {
-							NMaintenance = Integer.parseInt(NStrings[2].split(Pattern.quote("-"))[0]);
-							NBuildString = NStrings[2].split(Pattern.quote("-"))[1];
-							if (NBuildString.contains("b")) {
+					nMinor = Integer.parseInt(nStrings[1]);
+					if (nStrings.length > 2)
+						if (nStrings[2].contains("-")) {
+							nMaintenance = Integer.parseInt(nStrings[2].split(Pattern.quote("-"))[0]);
+							nBuildString = nStrings[2].split(Pattern.quote("-"))[1];
+							if (nBuildString.contains("b")) {
 								beta = true;
-								NBuildString = NBuildString.replace("b", "");
-								if (NBuildString != "")
-									NBuild = Integer.parseInt(NBuildString) - 1;
-							} else if (NBuildString.contains("a")) {
+								nBuildString = nBuildString.replace("b", "");
+								if (nBuildString != "")
+									nBuild = Integer.parseInt(nBuildString) - 1;
+							} else if (nBuildString.contains("a")) {
 								alpha = true;
-								NBuildString = NBuildString.replace("a", "");
-								if (NBuildString != "")
-									NBuild = Integer.parseInt(NBuildString) - 10;
+								nBuildString = nBuildString.replace("a", "");
+								if (nBuildString != "")
+									nBuild = Integer.parseInt(nBuildString) - 10;
 							} else
-								NBuild = Integer.parseInt(NBuildString);
+								nBuild = Integer.parseInt(nBuildString);
 						} else
-							NMaintenance = Integer.parseInt(NStrings[2]);
+							nMaintenance = Integer.parseInt(nStrings[2]);
 				}
 
 			/** \\ **/
@@ -327,9 +327,9 @@ public class ShareControl extends JavaPlugin implements Listener {
 			 * \ CHECK VERSIONS /**\ /**\\
 			 **/
 			/** \\ **//** \\ **/
-			if ((CMajor < NMajor) || (CMajor == NMajor && CMinor < NMinor)
-					|| (CMajor == NMajor && CMinor == NMinor && CMaintenance < NMaintenance)
-					|| (CMajor == NMajor && CMinor == NMinor && CMaintenance == NMaintenance && CBuild < NBuild))
+			if ((cMajor < nMajor) || (cMajor == nMajor && cMinor < nMinor)
+					|| (cMajor == nMajor && cMinor == nMinor && cMaintenance < nMaintenance)
+					|| (cMajor == nMajor && cMinor == nMinor && cMaintenance == nMaintenance && cBuild < nBuild))
 				result = UpdateResult.UPDATE_AVAILABLE;
 			else
 				result = UpdateResult.NO_UPDATE;
